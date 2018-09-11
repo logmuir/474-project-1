@@ -1,6 +1,6 @@
 
 #gameBoard{
-    width: 700px;    
+    width: 700px;
     height: 620px;
     border-style:solid;
     border-width:1px;
@@ -10,7 +10,7 @@
 }
 #scoreBoard{
     background: silver;
-    width: 680px;    
+    width: 680px;
     height: 80px;
     margin:10px 10px;
     position:relative;
@@ -25,7 +25,7 @@
 
 #futball{
     position:absolute;
-    background:url('../images/futball.gif');
+    background:url('../images/pumpkin.jpg');
     background-size:20px;
     height:20px;
     width:20px;
@@ -35,11 +35,12 @@
 
 #goalie{
     position:absolute;
-    background:url('../images/tinygoalie2.png');
-    height:60px;
-    width:25px;
-    top:68px;
-    right:0px;
+    background:url('../images/pumpkin.jpg');
+    background-size:20px;
+    height:20px;
+    width:20px;
+    top:100px;
+    left:20px;
 }
 
 #goalBox{
@@ -123,4 +124,3 @@
 	color: #996633;
 	cursor: pointer;
 }
-
