@@ -16,7 +16,7 @@
     position:relative;
 }
 #playBoard{
-    background:url('../images/halfField.jpg');
+    background:url('../images/background.jpg');
     margin:10px 10px;
     width:680px;
     height:500px;
