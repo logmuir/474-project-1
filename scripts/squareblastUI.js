@@ -3,7 +3,7 @@ var futballUI = function () {
     this.game = undefined;
     this.running = false;
     this.initialize = function () {
-        self.game = new futballGame()
+        self.game = new squareBlastGame()
 
         $('#GameStopped').show();
         $('#GameRunning').hide();

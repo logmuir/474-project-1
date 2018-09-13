@@ -1,4 +1,4 @@
-var futballGame = function () {
+var squareBlastGame = function () {
     var self = this;
 
     this.initialize = function () {
