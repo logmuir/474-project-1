@@ -26,7 +26,6 @@ var futballUI=function()
             $('#GameRunning').show();
             $('#Status').text('Get Ready...');
             self.running=true;
-            self.takeShot();
         });
         $('#StopBtn').on('click',function(){
             $('#GameStopped').show();
@@ -43,20 +42,7 @@ var futballUI=function()
         $('#AttemptCount').text(self.game.shotsTaken);
         $('#MissCount').text(self.game.shotsMissed);
     };
-    this.takeShot=function()
-    {
-            //wait some amount of time
-            var delay=Math.floor(Math.random()*1000+1001);
-            //calculate shot
-            self.game.calculateShot();
-            setTimeout(function(){
-                $('#Status').text('Get Ready...');
-                self.refreshView();
-                setTimeout(function(){
-                    self.updateUI();},3000);
-            },delay);
 
-    };
     this.updateUI=function()
     {
         if (self.running==false)
@@ -70,23 +56,6 @@ var futballUI=function()
                 setTimeout(function(){self.updateUI();},10);
                 return;
             }
-            else if (result==1)
-            {
-                $('#Status').text('GOOOOOOAAAAAALLLLLL!!!!!')
-            }
-            else if (result==2)
-            {
-                $('#Status').text('Great Block');
-            }
-            else
-            {
-                $('#Status').text('Miss')        ;
-            }
-            if (self.running==true)
-            {
-                self.takeShot();
-            }
-
     }
     this.initialize();
 }

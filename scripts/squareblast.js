@@ -51,35 +51,8 @@ var futballGame=function(){
         var newSpeed=Math.floor(Math.random()*(self.options.maxballSpeed-self.options.minballSpeed)+self.options.minballSpeed+1);
         self.ball.setTrajectory(newAngle,newSpeed);
     };
+    
     this.update=function(time){
-        self.ball.updatePosition(time);
-
-        if (self.ball.xPos>self.options.width-self.options.goalRight-self.options.goalWidth)
-        {
-            var topPostY=(self.options.height-self.options.goalHeight)/2;
-            var botPostY=topPostY+self.options.goalHeight;
-            self.shotsTaken++;
-            if (self.ball.yPos>topPostY && self.ball.yPos<botPostY){
-                if (self.ball.yPos-topPostY<self.goaltender.Position||self.ball.yPos-topPostY>self.goaltender.Position+self.options.goalieHeight)
-                {
-                    self.ball.xPos=self.options.width-self.options.goalRight-self.options.goalWidth/2;
-
-                    return 1;
-                }
-                else{
-                    self.ball.xPos=self.options.width-self.options.goalRight-self.options.goalWidth;
-                    self.shotsMissed++;
-                    return 2;
-
-                }
-            }
-            else
-            {
-                self.ball.xPos=self.options.width-self.options.goalRight-self.options.goalWidth/2;
-                self.shotsMissed++;
-                return 3;
-            }
-        }
 
         return 0;
 
@@ -138,13 +111,6 @@ var futball=function(){
         self.angle=angle;
         self.speed=speed;
     };
-    this.updatePosition=function(time){
-        //speed*time gives distance.
-        var distance=self.speed*time;
-        //calculate new x,y from distance and angle y is sin*dist, x is cos*dist
-        self.yPos=self.yPos+Math.sin(self.angle)*distance;
-        self.xPos=self.xPos+Math.cos(self.angle)*distance;
 
-    }
     this.initialize();
 }
