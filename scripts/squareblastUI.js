@@ -40,8 +40,7 @@ var futballUI=function()
         $('#futball').css("left",self.game.ball.xPos-7);
         $('#futball').css("top",self.game.ball.yPos-7);
         $('#goalie').css("top",self.game.goaltender.Position+'px');
-        $('#AttemptCount').text(self.game.shotsTaken);
-        $('#MissCount').text(self.game.shotsMissed);
+        $('#score_calc').text(self.game.score_calc);
     };
     this.takeShot=function()
     {
