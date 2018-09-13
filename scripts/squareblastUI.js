@@ -11,15 +11,14 @@ var futballUI=function()
             $('#GameRunning').hide();
 
       $('body').keypress(function(event){
-            if (event.which==97)
+            if (event.which==97) // Presses 'A' key
             {
-                self.game.goaltender.incrementPosition(-10);
+
             }
-            else if (event.which=122)
+            else if (event.which = 122) // Presses 'D' key
             {
-                self.game.goaltender.incrementPosition(10);
+                
             }
-            $('#goalie').css("top",self.game.goaltender.Position+'px');
         });
         $('#StartBtn').on('click',function(){
             $('#GameStopped').hide();
