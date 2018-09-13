@@ -1,4 +1,4 @@
-var futballUI = function () {
+var SquareBlastUI = function () {
     var self = this;
     this.game = undefined;
     this.running = false;
