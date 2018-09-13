@@ -49,7 +49,7 @@ var futballUI=function()
         {
             return;
         }
-            var result=self.game.update(.1);
+            var result=self.game.update();
             self.refreshView();
 
             if (result==0){

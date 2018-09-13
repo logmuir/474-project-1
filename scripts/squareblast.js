@@ -23,36 +23,10 @@ var futballGame=function(){
     this.ball=new futball();
     this.goaltender=new goalie(this.options.goalHeight/2-this.options.goalieHeight/2,0,this.options.goalHeight-this.options.goalieHeight);
     this.initialize=function(){
-        self.reset();
-    };
-    this.reset=function(){
-        self.shotsTaken=0;
-        self.shotsMissed=0;
+
     };
 
-    this.calculateShot=function(){
-        //put ball in random position
-        var xPos=self.options.width-self.options.minRange-self.options.minX;
-        xPos=Math.floor(Math.random()*xPos+self.options.minX+1);
-        var yPos=self.options.height-2*self.options.minY;
-        yPos=Math.floor(Math.random()*yPos+self.options.minY+1);
-        self.ball.positionBall(xPos,yPos);
-        var postX=self.options.width-self.options.goalRight-self.options.goalWidth;
-        var topPostY=(self.options.height-self.options.goalHeight*self.options.errorPercent)/2;
-        var botPostY=topPostY+self.options.goalHeight*self.options.errorPercent;
-        var angle1=Math.atan2(yPos-topPostY,postX-xPos);
-        var angle2=Math.atan2(yPos-botPostY,postX-xPos);
-        var minAngle=Math.min(angle1,angle2);
-        var maxAngle=Math.max(angle1,angle2);
-        var newAngle=Math.random()*(maxAngle-minAngle)+minAngle
-        if (minAngle==angle2){
-            newAngle*=-1.0;
-        }
-        var newSpeed=Math.floor(Math.random()*(self.options.maxballSpeed-self.options.minballSpeed)+self.options.minballSpeed+1);
-        self.ball.setTrajectory(newAngle,newSpeed);
-    };
-    
-    this.update=function(time){
+    this.update=function(){
 
         return 0;
 
@@ -69,7 +43,9 @@ var goalie=function(yPos,minY,maxY){
     this.maxY=maxY;
     this.initialize=function()
     {
+
     };
+
     this.setPosition=function(yPos){
         if (yPos<self.minY)
         {
@@ -83,10 +59,12 @@ var goalie=function(yPos,minY,maxY){
             self.Position=yPos;
         }
     };
+
     this.incrementPosition=function(amount){
         self.setPosition(self.Position+amount);
 
     };
+    
     this.initialize();
 }
 
