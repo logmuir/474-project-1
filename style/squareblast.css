@@ -9,15 +9,15 @@
     padding:0;
 }
 #scoreBoard{
-    background: silver;
+    background: #2C2C2C;
     width: 680px;
     height: 80px;
-    margin:10px 10px;
+    margin:5px 5px;
     position:relative;
 }
 #playBoard{
     background:url('../images/background.jpg');
-    margin:10px 10px;
+    margin:5px 5px;
     width:680px;
     height:500px;
     position:relative;
@@ -81,12 +81,12 @@
 }
 .btnStyle {
 	border-radius: 4px;
-	border: thin solid #F0E020;
-	background-color: #F8F094;
+	border: thin solid #161616;
+	background-color: #282828;
 	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 	font-weight: bold;
 	font-size:20px;
-	color: #663300;
+	color: #efeaea;
 	padding: 5px 30px;
 	margin:8px 70px;
 }
@@ -99,8 +99,8 @@
 }
 
 .btnStyle:hover {
-	border: thin solid #FFCC00;
-	background-color: #FCF9D6;
-	color: #996633;
+	border: thin solid #282828;
+	background-color: #efeaea;
+	color: #282828;
 	cursor: pointer;
 }
