@@ -1,4 +1,4 @@
-var squareBlastGame = function () {
+var SquareBlastGame = function () {
     var self = this;
 
     this.initialize = function () {

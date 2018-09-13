@@ -3,7 +3,7 @@ var SquareBlastUI = function () {
     this.game = undefined;
     this.running = false;
     this.initialize = function () {
-        self.game = new squareBlastGame()
+        self.game = new SquareBlastGame()
 
         $('#GameStopped').show();
         $('#GameRunning').hide();
