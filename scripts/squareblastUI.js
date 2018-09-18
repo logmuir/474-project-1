@@ -23,6 +23,7 @@ var SquareBlastUI = function () {
             $('#GameRunning').show();
             $('#Status').text('Get Ready...');
             self.running = true;
+            self.updateUI();
         });
         $('#StopBtn').on('click', function () {
             $('#GameStopped').show();
