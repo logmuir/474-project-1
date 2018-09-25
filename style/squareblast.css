@@ -67,16 +67,6 @@
     top:100px;
     left:20px;
 }
-
-#goalie{
-    position:absolute;
-    background:url('../images/pumpkin.jpg');
-    background-size:20px;
-    height:20px;
-    width:20px;
-    top:100px;
-    left:20px;
-}
 .Scores{
     position:absolute;
     margin:5px;
@@ -94,14 +84,6 @@
     top:0px;
     position:absolute;
     right:0px;
-}
-#ShotsAttempted{
-    right:0;
-    top:0;
-}
-#ShotsMissed{
-    right:0;
-    bottom:0;
 }
 .Status{
     left:0px;

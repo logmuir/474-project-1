@@ -1,0 +1,71 @@
+
+
+#mainContent{
+    height: 95%;
+    width: 95%;
+
+    border-style:solid;
+    border-width:1px;
+    border-color:black;
+    margin: 5px;
+
+    display: grid;
+    grid-template-columns: repeat(10, [col] auto );
+    grid-template-rows: repeat(10, [row] auto  );
+
+    position: absolute;
+
+}
+
+#scoreBoard{
+    border-style:solid;
+    border-width:1px;
+    border-color:black;
+    grid-row: 1;
+    grid-column: 1 / 11;
+
+    display: grid;
+    grid-template-columns: repeat(3, [col] auto );
+    grid-template-rows: repeat(1, [row] auto  );
+}
+
+#StartBtn {
+    height: 100%;
+    width: 100%;
+}
+
+#StopBtn {
+    height: 100%;
+    width: 100%;
+}
+
+.btnStyle {
+	border: thin solid #161616;
+	background-color: #282828;
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	font-weight: bold;
+	font-size:20px;
+	color: #efeaea;
+}
+
+.btnStyle:active {
+	border: thin solid #99CC00;
+	background-color: #F5FFD2;
+	color: #669900;
+	cursor: pointer;
+}
+
+.btnStyle:hover {
+	border: thin solid #282828;
+	background-color: #efeaea;
+	color: #282828;
+	cursor: pointer;
+}
+
+#playBoard{
+    background: url('../images/background.jpg');
+    grid-row: 2 / 11;
+    grid-column: 1 / 11;
+    background-size: contain;
+}
+
