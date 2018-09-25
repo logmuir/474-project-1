@@ -1,26 +1,61 @@
-
-#gameBoard{
-    width: 700px;
-    height: 620px;
+#mainContent{
+    height:100%;
+    width:100%;
     border-style:solid;
     border-width:1px;
     border-color:black;
     margin:0;
     padding:0;
 }
+
+#gameBoard{
+    height:100%;
+    width:100%;
+    border-style:solid;
+    border-width:1px;
+    border-color:black;
+    margin:0;
+    padding:0;
+}
+
 #scoreBoard{
     background: #2C2C2C;
-    width: 680px;
-    height: 80px;
-    margin:5px 5px;
-    position:relative;
+    width: 100%;
+    height: 25%;
 }
+
+.btnStyle {
+	border-radius: 4px;
+	border: thin solid #161616;
+	background-color: #282828;
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	font-weight: bold;
+	font-size:20px;
+	color: #efeaea;
+	padding: 5px 30px;
+	margin:8px 70px;
+}
+
+.btnStyle:active {
+	border: thin solid #99CC00;
+	background-color: #F5FFD2;
+	color: #669900;
+	cursor: pointer;
+}
+
+.btnStyle:hover {
+	border: thin solid #282828;
+	background-color: #efeaea;
+	color: #282828;
+	cursor: pointer;
+}
+
 #playBoard{
     background:url('../images/background.jpg');
     margin:5px 5px;
     width:680px;
     height:500px;
-    position:relative;
+    position: relative;
 }
 
 #futball{
@@ -69,7 +104,6 @@
     bottom:0;
 }
 .Status{
-    position:absolute;
     left:0px;
     bottom:0px;
     padding:3px;
@@ -78,29 +112,4 @@
     border-top:1px solid black;
     border-right:1px solid black;
     text-align:center;
-}
-.btnStyle {
-	border-radius: 4px;
-	border: thin solid #161616;
-	background-color: #282828;
-	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-	font-weight: bold;
-	font-size:20px;
-	color: #efeaea;
-	padding: 5px 30px;
-	margin:8px 70px;
-}
-
-.btnStyle:active {
-	border: thin solid #99CC00;
-	background-color: #F5FFD2;
-	color: #669900;
-	cursor: pointer;
-}
-
-.btnStyle:hover {
-	border: thin solid #282828;
-	background-color: #efeaea;
-	color: #282828;
-	cursor: pointer;
 }
