@@ -42,7 +42,7 @@ var player = function() {
     }
 
     self.movePlayerUp = function() {
-        self.yPosition += self.moveDx;
+        self.yPosition -= self.moveDx;
     }
     self.movePlayerLeft = function() {
         self.xPosition -= self.moveDx;

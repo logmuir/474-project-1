@@ -8,16 +8,16 @@ var SquareBlastUI = function () {
         $('#GameStopped').show();
         $('#GameRunning').hide();
 
-        document.addEventListener('keydown', function(event) {
+        document.addEventListener('keydown', function (event) {
             console.log(self.game);
             if (event.keyCode == 68) { //right
-                self.game.player.movePlayerUp();
+                self.game.player.movePlayerRight();
             }
             if (event.keyCode == 65) { //left
                 self.game.player.movePlayerLeft();
             }
             if (event.keyCode == 87) { //up
-                self.game.player.movePlayerRight();
+                self.game.player.movePlayerUp();
             }
             if (event.keyCode == 83) { //down
                 self.game.player.movePlayerDown();
