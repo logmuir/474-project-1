@@ -13,12 +13,10 @@ var SquareBlastGame = function () {
         }
 
         document.getElementById("randomSquaresTargetDiv").outerHTML = htmlToInsert;
-        console.log(self.enemySquares);
     };
 
     this.updateView = function () {
 
-        // console.log('blorp');
         self.player.updateSprite();
         return 0;
     };
@@ -36,7 +34,6 @@ var player = function() {
     self.playerDiv = document.getElementById('player');
 
     self.updateSprite = function () {
-        console.log(self.playerDiv);
         self.playerDiv.style.left = self.xPosition + 'px';
         self.playerDiv.style.top = self.yPosition + 'px';
     }

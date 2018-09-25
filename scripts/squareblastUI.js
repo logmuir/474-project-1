@@ -9,18 +9,20 @@ var SquareBlastUI = function () {
         $('#GameRunning').hide();
 
         document.addEventListener('keydown', function (event) {
-            console.log(self.game);
-            if (event.keyCode == 68) { //right
-                self.game.player.movePlayerRight();
-            }
-            if (event.keyCode == 65) { //left
-                self.game.player.movePlayerLeft();
-            }
-            if (event.keyCode == 87) { //up
-                self.game.player.movePlayerUp();
-            }
-            if (event.keyCode == 83) { //down
-                self.game.player.movePlayerDown();
+            if (self.running) {
+                if (event.keyCode == 68) { //right
+                    self.game.player.movePlayerRight();
+                }
+                if (event.keyCode == 65) { //left
+                    self.game.player.movePlayerLeft();
+                }
+                if (event.keyCode == 87) { //up
+                    self.game.player.movePlayerUp();
+                }
+                if (event.keyCode == 83) { //down
+                    self.game.player.movePlayerDown();
+                }
+
             }
         })
 
@@ -43,7 +45,6 @@ var SquareBlastUI = function () {
             return;
         }
         var result = self.game.updateView();
-        console.log(result);
         if (result == 0) {
             setTimeout(function () { self.updateUI(); }, 10);
             return;
