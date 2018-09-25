@@ -1,23 +1,29 @@
 var SquareBlastUI = function () {
     var self = this;
-    this.game = undefined;
-    this.running = false;
-    this.initialize = function () {
+    self.game = undefined;
+    self.running = false;
+    self.initialize = function () {
         self.game = new SquareBlastGame()
 
         $('#GameStopped').show();
         $('#GameRunning').hide();
 
-        $('body').keypress(function (event) {
-            if (event.which == 97) // Presses 'A' key
-            {
-
+        document.addEventListener('keydown', function(event) {
+            console.log(self.game);
+            if (event.keyCode == 68) { //right
+                self.game.player.movePlayerUp();
             }
-            else if (event.which = 122) // Presses 'D' key
-            {
-
+            if (event.keyCode == 65) { //left
+                self.game.player.movePlayerLeft();
             }
-        });
+            if (event.keyCode == 87) { //up
+                self.game.player.movePlayerRight();
+            }
+            if (event.keyCode == 83) { //down
+                self.game.player.movePlayerDown();
+            }
+        })
+
         $('#StartBtn').on('click', function () {
             $('#GameStopped').hide();
             $('#GameRunning').show();
@@ -29,20 +35,15 @@ var SquareBlastUI = function () {
             $('#GameStopped').show();
             $('#GameRunning').hide();
             self.running = false;
-            self.refreshView();
         });
-    };
-    this.refreshView = function () {
-
     };
 
     this.updateUI = function () {
         if (self.running == false) {
             return;
         }
-        var result = self.game.update();
-        self.refreshView();
-
+        var result = self.game.updateView();
+        console.log(result);
         if (result == 0) {
             setTimeout(function () { self.updateUI(); }, 10);
             return;
