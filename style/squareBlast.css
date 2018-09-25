@@ -63,10 +63,11 @@
 }
 
 #playBoard {
-    background: url('../images/background.jpg');
     grid-row: 2 / 11;
     grid-column: 1 / 11;
+    background-image: url('../images/background.jpg');
     background-size: contain;
+    background-repeat: round;
 }
 
 #player {
