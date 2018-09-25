@@ -13,14 +13,13 @@
 <body>
     <div id="mainContent">
         <div id="scoreBoard">
-            <div id="GameStopped"><button id="StartBtn" class="btnStyle">Start Game</button>
+            <div id="GameStopped"><button id="StartBtn" class="scoreBoardStopStartButton">Start Game</button>
                 <div class="Status">Click Start to begin</div>
             </div>
-            <div id="GameRunning"><button id="StopBtn" class="btnStyle">Stop Game</button>
+            <div id="GameRunning"><button id="StopBtn" class="scoreBoardStopStartButton">Stop Game</button>
                 <div id="Status" class="Status"></div>
             </div>
-            <div id="score_calc" class="Scores">Current Score: <div class="OutputText" id="score_calc">0</div>
-            </div>
+            <div class="OutputText" id="scorePanel">Score: 0</div>
         </div>
         <div id="playBoard">
             <div id="player"></div>
