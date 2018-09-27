@@ -8,11 +8,11 @@ var SquareBlastGame = function () {
 
         var htmlToInsert = "";
         for (var currentIndex = 0; currentIndex < 10; currentIndex++) {
-            self.enemySquares.push(new EnemySquare());
-            htmlToInsert += "<div id='enemySquare" + currentIndex + "'></div>";
+            var enemySquareToPush = new EnemySquare(currentIndex)
+            self.enemySquares.push(enemySquareToPush);
+            htmlToInsert += enemySquareToPush.htmlDivString;
         }
-
-        document.getElementById("randomSquaresTargetDiv").outerHTML = htmlToInsert;
+        document.getElementById("enemySquaresTargetDiv").outerHTML = htmlToInsert;
     };
 
     this.onTick = function () {
@@ -34,7 +34,7 @@ var SquareBlastGame = function () {
 
 }
 
-var Player = function() {
+var Player = function () {
     var self = this;
     self.xPosition = 0;
     self.yPosition = 0;
@@ -47,25 +47,34 @@ var Player = function() {
         self.playerDiv.style.top = self.yPosition + 'px';
     }
 
-    self.movePlayerUp = function() {
+    self.movePlayerUp = function () {
         self.yPosition -= self.moveDx;
     }
-    self.movePlayerLeft = function() {
+    self.movePlayerLeft = function () {
         self.xPosition -= self.moveDx;
     }
-    self.movePlayerRight = function() {
+    self.movePlayerRight = function () {
         self.xPosition += self.moveDx;
     }
-    self.movePlayerDown = function() {
+    self.movePlayerDown = function () {
         self.yPosition += self.moveDx;
     }
 }
 
 
-var EnemySquare =function () {
-    this.xPos = 0;
-    this.yPos = 0;
+var EnemySquare = function (squareIndex) {
+    self = this;
+    self.xPos = 0;
+    self.yPos = 0;
+    self.xSpeed = Math.floor(Math.random() * 10);
+    self.ySpeed = Math.floor(Math.random() * 10);
+    self.squareID = "enemySquare" + squareIndex;
+    self.htmlDivString = "<div id='" + self.squareID + "'></div>";
+    
+    self.correspondingDiv = document.getElementById(self.squareID);
+    
+    
+    self.updateSprite = function() {
 
-    //direction
-
+    }
 }
