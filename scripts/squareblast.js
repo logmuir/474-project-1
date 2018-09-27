@@ -4,28 +4,37 @@ var SquareBlastGame = function () {
     self.enemySquares = [];
 
     this.initialize = function () {
-        self.player = new player();
+        self.player = new Player();
 
         var htmlToInsert = "";
         for (var currentIndex = 0; currentIndex < 10; currentIndex++) {
-            self.enemySquares.push(new enemySquare());
+            self.enemySquares.push(new EnemySquare());
             htmlToInsert += "<div id='enemySquare" + currentIndex + "'></div>";
         }
 
         document.getElementById("randomSquaresTargetDiv").outerHTML = htmlToInsert;
     };
 
-    this.updateView = function () {
+    this.onTick = function () {
 
-        self.player.updateSprite();
+        self.enemySquares.forEach(enemySquare => {
+            console.log(enemySquare);
+        });
+
+        self.updateView();
         return 0;
+
+    }
+
+    this.updateView = function () {
+        self.player.updateSprite();
     };
 
     this.initialize();
 
 }
 
-var player = function() {
+var Player = function() {
     var self = this;
     self.xPosition = 0;
     self.yPosition = 0;
@@ -53,7 +62,7 @@ var player = function() {
 }
 
 
-var enemySquare =function () {
+var EnemySquare =function () {
     this.xPos = 0;
     this.yPos = 0;
 

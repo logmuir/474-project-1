@@ -31,7 +31,7 @@ var SquareBlastUI = function () {
             $('#GameRunning').show();
             $('#Status').text('Get Ready...');
             self.running = true;
-            self.updateUI();
+            self.onTick();
         });
         $('#StopBtn').on('click', function () {
             $('#GameStopped').show();
@@ -40,13 +40,13 @@ var SquareBlastUI = function () {
         });
     };
 
-    this.updateUI = function () {
+    this.onTick = function () {
         if (self.running == false) {
             return;
         }
-        var result = self.game.updateView();
+        var result = self.game.onTick();
         if (result == 0) {
-            setTimeout(function () { self.updateUI(); }, 10);
+            setTimeout(function () { self.onTick(); }, 10);
             return;
         }
     }
