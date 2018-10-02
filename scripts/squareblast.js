@@ -2,7 +2,7 @@ var SquareBlastGame = function () {
     var self = this;
     self.player = undefined;
     self.enemySquares = [];
-    
+
     self.currentTick = 0;
 
     ConfigClass.enemySquareMaxXPosition = ConfigClass.getBoardHeight();
@@ -120,22 +120,25 @@ var EnemySquare = function (squareIndex, releaseTick) {
         self.associatedDiv.style.visibility = 'hidden';
     }
 
-    self.onTick = function () {
-	if(self.xPosition <=0){
-	    self.xPosition = 0;
-	    self.xSpeed *=-1; 
-	}else if (self.xPosition >= ConfigClass.getBoardWidth()){
-	    self.xPosition = ConfigClass.getBoardWidth();
-	    self.xSpeed*=-1;
-	}
+    self.onTick = function (currentGameTick) {
+        if (currentGameTick == self.releaseTick) {
+            self.associatedDiv.style.visibility = 'visible';
+        }
+        if (self.xPosition <= 0) {
+            self.xPosition = 0;
+            self.xSpeed *= -1;
+        } else if (self.xPosition >= ConfigClass.getBoardWidth()) {
+            self.xPosition = ConfigClass.getBoardWidth();
+            self.xSpeed *= -1;
+        }
 
-	if(self.yPosition <=0){
-	    self.yPosition = 0;
-	    self.ySpeed*=-1; 
-	}else if(self.yPosition >= ConfigClass.getBoardHeight()){
-	    self.yPositon = ConfigClass.getBoardHeight();
-	    self.ySpeed*=-1; 
-	}
+        if (self.yPosition <= 0) {
+            self.yPosition = 0;
+            self.ySpeed *= -1;
+        } else if (self.yPosition >= ConfigClass.getBoardHeight()) {
+            self.yPositon = ConfigClass.getBoardHeight();
+            self.ySpeed *= -1;
+        }
         self.xPosition += self.xSpeed;
         self.yPosition += self.ySpeed;
     }
