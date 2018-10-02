@@ -70,7 +70,7 @@ var player = function (width, height) {
         self.playerDiv.style.left = self.xPosition + 'px';
         self.playerDiv.style.top = self.yPosition + 'px';
     }
-    
+
     self.movePlayerUp = function () {
         if (self.yPosition <= 4) {
             self.yPosition = 0;
