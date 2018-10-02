@@ -2,9 +2,14 @@ var SquareBlastGame = function () {
     var self = this;
     self.player = undefined;
     self.enemySquares = [];
-    self.gameHeight = document.getElementById('playBoard').offsetHeight -4; 
-    self.gameWidth = document.getElementById('playBoard').offsetWidth -4; 
- 
+    self.gameHeight = document.getElementById('playBoard').offsetHeight - 4;
+    self.gameWidth = document.getElementById('playBoard').offsetWidth - 4;
+
+    ConfigClass.enemySquareMaxXPosition = 1000;
+    ConfigClass.enemySquareMaxYPosition = 1000;
+    ConfigClass.enemySquareMaxXSpeed = 10;
+    ConfigClass.enemySquareMaxYSpeed = 10;
+
 
     this.initialize = function () {
         self.player = new player(self.gameWidth, self.gameHeight);
@@ -45,18 +50,18 @@ var SquareBlastGame = function () {
     };
 
     this.initialize();
-    
+
 
 }
 
-var player = function(width, height) {
+var player = function (width, height) {
     var self = this;
     self.xPosition = 0;
     self.yPosition = 0;
     self.moveDx = 4;
     self.moveDy = 4;
     self.width = width;
-    self.height = height; 
+    self.height = height;
     self.playerDiv = document.getElementById('player');
 
     self.updateSprite = function () {
@@ -64,43 +69,42 @@ var player = function(width, height) {
         self.playerDiv.style.top = self.yPosition + 'px';
     }
 
-    self.movePlayerUp = function() {
-	if(self.yPosition <=4){
-	    self.yPosition = 0; 
-	}else{
+    self.movePlayerUp = function () {
+        if (self.yPosition <= 4) {
+            self.yPosition = 0;
+        } else {
             self.yPosition -= self.moveDx;
-	}
+        }
     }
-    self.movePlayerLeft = function() {
-	if(self.xPosition <=4){
-	    self.xPosition = 0; 
-	}else{
+    self.movePlayerLeft = function () {
+        if (self.xPosition <= 4) {
+            self.xPosition = 0;
+        } else {
             self.xPosition -= self.moveDx;
-	}
+        }
     }
-    self.movePlayerRight = function() {
-	if(self.xPosition >= width){
-	    self.xPosition = width; 
-	}else{
+    self.movePlayerRight = function () {
+        if (self.xPosition >= width) {
+            self.xPosition = width;
+        } else {
             self.xPosition += self.moveDx;
-	}
+        }
     }
-    self.movePlayerDown = function() {
-	if(self.yPosition >= height){
-	    self.yPosition = height; 
-	}else{
+    self.movePlayerDown = function () {
+        if (self.yPosition >= height) {
+            self.yPosition = height;
+        } else {
             self.yPosition += self.moveDx;
-	}
+        }
     }
 }
 
-
 var EnemySquare = function (squareIndex) {
     var self = this;
-    self.xPosition = Math.floor(Math.random() * 1000);
-    self.yPosition = Math.floor(Math.random() * 1000);
-    self.xSpeed = Math.pow(-1, Math.floor(Math.random() * 2) + 1) * (Math.floor(Math.random() * 10) + 1);
-    self.ySpeed = Math.pow(-1, Math.floor(Math.random() * 2) + 1) * (Math.floor(Math.random() * 10) + 1);
+    self.xPosition = ConfigClass.getEnemySquareXPositionValue();
+    self.yPosition = ConfigClass.getEnemySquareYPositionValue();
+    self.xSpeed = ConfigClass.getEnemySquareXSpeedValue();
+    self.ySpeed = ConfigClass.getEnemySquareYSpeedValue();
     self.squareID = "enemySquare" + squareIndex;
     self.htmlDivString = "<div id='" + self.squareID + "' class='enemySquare'></div>";
     self.associatedDiv = null;
@@ -112,12 +116,32 @@ var EnemySquare = function (squareIndex) {
     }
 
     self.onTick = function () {
-        self.xPosition += self.xSpeed
-        self.yPosition += self.ySpeed
+        self.xPosition += self.xSpeed;
+        self.yPosition += self.ySpeed;
+        ConfigClass.blorp()
     }
 
     self.updateSprite = function () {
         self.associatedDiv.style.left = self.xPosition + 'px';
         self.associatedDiv.style.top = self.yPosition + 'px';
+    }
+}
+
+class ConfigClass {
+    static getEnemySquareXPositionValue() {
+        return Math.floor(Math.random() * this.enemySquareMaxXPosition);
+    }
+    static getEnemySquareYPositionValue() {
+        return Math.floor(Math.random() * this.enemySquareMaxYPosition);
+    }
+    static getEnemySquareXSpeedValue() {
+        return Math.pow(-1, Math.floor(Math.random() * 2) + 1) * (Math.floor(Math.random() * this.enemySquareMaxXSpeed) + 1);
+    }
+    static getEnemySquareYSpeedValue() {
+        return Math.pow(-1, Math.floor(Math.random() * 2) + 1) * (Math.floor(Math.random() * this.enemySquareMaxYSpeed) + 1);
+    }
+
+    static blorp() {
+        console.log("AY");
     }
 }
