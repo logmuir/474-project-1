@@ -2,7 +2,7 @@ var SquareBlastGame = function () {
     var self = this;
     self.player = undefined;
     self.enemySquares = [];
-    self.gameHeight = document.getElementById('playBoard').offsetHeight; 
+    self.gameHeight = document.getElementById('playBoard').offsetHeight -4; 
     self.gameWidth = document.getElementById('playBoard').offsetWidth -4; 
  
 
