@@ -38,6 +38,7 @@ var SquareBlastUI = function () {
             $('#GameRunning').hide();
             self.running = false;
         });
+
     };
 
     this.onTick = function () {
@@ -45,6 +46,7 @@ var SquareBlastUI = function () {
             return;
         }
         var result = self.game.onTick();
+          $('#scorePanel').text('Score: ' + self.game.currentTick);
         if (result == 0) {
             setTimeout(function () { self.onTick(); }, 10);
             return;
