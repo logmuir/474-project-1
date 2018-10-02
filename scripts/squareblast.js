@@ -40,6 +40,7 @@ var SquareBlastGame = function () {
 
         self.updateView();
         self.currentTick++;
+      //  document.getElementById('scorePanel').innerHTML = "Score: " + currentTick;
         return 0;
 
     }
@@ -70,7 +71,7 @@ var player = function (width, height) {
         self.playerDiv.style.left = self.xPosition + 'px';
         self.playerDiv.style.top = self.yPosition + 'px';
     }
-    
+
     self.movePlayerUp = function () {
         if (self.yPosition <= 4) {
             self.yPosition = 0;
@@ -141,8 +142,13 @@ class ConfigClass {
     static getEnemySquareYSpeedValue() {
         return Math.pow(-1, Math.floor(Math.random() * 2) + 1) * (Math.floor(Math.random() * this.enemySquareMaxYSpeed) + 1);
     }
+<<<<<<< HEAD
     static getBoardHeight() {
         return document.getElementById('playBoard').offsetHeight;
+=======
+    static getBoardHeight(){
+	return document.getElementById('playBoard').offsetHeight;
+>>>>>>> score
     }
 
     static getBoardWidth() {
