@@ -5,8 +5,8 @@ var SquareBlastGame = function () {
 
     self.currentTick = 0;
 
-    ConfigClass.enemySquareMaxXPosition = self.gameWidth;
-    ConfigClass.enemySquareMaxYPosition = self.gameHeight;
+    ConfigClass.enemySquareMaxXPosition = ConfigClass.getBoardHeight();
+    ConfigClass.enemySquareMaxYPosition = ConfigClass.getBoardWidth();
     ConfigClass.enemySquareMaxXSpeed = 3;
     ConfigClass.enemySquareMaxYSpeed = 3;
     ConfigClass.totalEnemySquaresToGenerate = 10
@@ -86,15 +86,15 @@ var player = function (width, height) {
         }
     }
     self.movePlayerRight = function () {
-        if (self.xPosition >= getBoardWidth()) {
-            self.xPosition = getBoardWidth();
+        if (self.xPosition >= ConfigClass.getBoardWidth()) {
+            self.xPosition = ConfigClass.getBoardWidth();
         } else {
             self.xPosition += self.moveDx;
         }
     }
     self.movePlayerDown = function () {
-        if (self.yPosition >= getBoardHeight()) {
-            self.yPosition = getBoardHeight();
+        if (self.yPosition >= ConfigClass.getBoardHeight()) {
+            self.yPosition = ConfigClass.getBoardHeight();
         } else {
             self.yPosition += self.moveDx;
         }
@@ -141,11 +141,11 @@ class ConfigClass {
     static getEnemySquareYSpeedValue() {
         return Math.pow(-1, Math.floor(Math.random() * 2) + 1) * (Math.floor(Math.random() * this.enemySquareMaxYSpeed) + 1);
     }
-    static getBoardHeight(){	
-	return document.getElementById('playBoard').offsetHeight; 
+    static getBoardHeight() {
+        return document.getElementById('playBoard').offsetHeight;
     }
 
-    static getBoardWidth(){
-	return document.getElementById('playBoard').offsetWidth - 4;
+    static getBoardWidth() {
+        return document.getElementById('playBoard').offsetWidth - 4;
     }
 }
