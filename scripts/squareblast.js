@@ -7,11 +7,7 @@ var SquareBlastGame = function () {
  
 
     this.initialize = function () {
-<<<<<<< HEAD
-        self.player = new Player();
-=======
         self.player = new player(self.gameWidth, self.gameHeight);
->>>>>>> 73c3f31a6c0de0c5bd988666566d6a73527aa537
 
         var htmlToInsert = "";
         for (var currentIndex = 0; currentIndex < 10; currentIndex++) {
@@ -42,11 +38,7 @@ var SquareBlastGame = function () {
 
 }
 
-<<<<<<< HEAD
-var Player = function() {
-=======
 var player = function(width, height) {
->>>>>>> 73c3f31a6c0de0c5bd988666566d6a73527aa537
     var self = this;
     self.xPosition = 0;
     self.yPosition = 0;
