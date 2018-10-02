@@ -37,6 +37,7 @@ var SquareBlastGame = function () {
 
         self.enemySquares.forEach(enemySquare => {
             enemySquare.onTick(self.currentTick);
+            console.log(enemySquare);
         });
 
         self.updateView();
@@ -145,20 +146,20 @@ class ConfigClass {
         this.startPositionArrayToReturn = [];
 
         if (this.startSide == 0) {
-            this.startPositionArrayToReturn.push(this.getEnemySquareXPositionValue);
+            this.startPositionArrayToReturn.push(this.getEnemySquareXPositionValue());
             this.startPositionArrayToReturn.push(0);
         }
         else if (this.startSide == 1) {
             this.startPositionArrayToReturn.push(this.enemySquareMaxXPosition);
-            this.startPositionArrayToReturn.push(this.getEnemySquareYPositionValue);
+            this.startPositionArrayToReturn.push(this.getEnemySquareYPositionValue());
         }
         else if (this.startSide == 2) {
-            this.startPositionArrayToReturn.push(this.getEnemySquareXPositionValue);
+            this.startPositionArrayToReturn.push(this.getEnemySquareXPositionValue());
             this.startPositionArrayToReturn.push(this.enemySquareMaxYPosition);
         }
         else if (this.startSide == 3) {
             this.startPositionArrayToReturn.push(0);
-            this.startPositionArrayToReturn.push(this.getEnemySquareYPositionValue);
+            this.startPositionArrayToReturn.push(this.getEnemySquareYPositionValue());
         }
 
         return this.startPositionArrayToReturn;
