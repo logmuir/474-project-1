@@ -73,7 +73,6 @@
 #player {
     height: 100px;
     width: 100px;
-    top: 50%;
-    right: 50%;
+    right: 100%;
     position: absolute;
 }

@@ -2,9 +2,9 @@ var SquareBlastGame = function () {
     var self = this;
     self.player = undefined;
     self.enemySquares = [];
-    self.gameHeight = document.getElementById('playBoard').offsetHeight; 
-    self.gameWidth = document.getElementById('playBoard').offsetWidth -4; 
- 
+    self.gameHeight = document.getElementById('playBoard').offsetHeight;
+    self.gameWidth = document.getElementById('playBoard').offsetWidth -4;
+
 
     this.initialize = function () {
         self.player = new player(self.gameWidth, self.gameHeight);
@@ -25,18 +25,18 @@ var SquareBlastGame = function () {
     };
 
     this.initialize();
-    
+
 
 }
 
 var player = function(width, height) {
     var self = this;
-    self.xPosition = 0;
-    self.yPosition = 0;
+    self.xPosition = 550;
+    self.yPosition = 200;
     self.moveDx = 4;
     self.moveDy = 4;
     self.width = width;
-    self.height = height; 
+    self.height = height;
     self.playerDiv = document.getElementById('player');
 
     self.updateSprite = function () {
@@ -46,28 +46,28 @@ var player = function(width, height) {
 
     self.movePlayerUp = function() {
 	if(self.yPosition <=4){
-	    self.yPosition = 0; 
+	    self.yPosition = 0;
 	}else{
             self.yPosition -= self.moveDx;
 	}
     }
     self.movePlayerLeft = function() {
 	if(self.xPosition <=4){
-	    self.xPosition = 0; 
+	    self.xPosition = 0;
 	}else{
             self.xPosition -= self.moveDx;
 	}
     }
     self.movePlayerRight = function() {
 	if(self.xPosition >= width){
-	    self.xPosition = width; 
+	    self.xPosition = width;
 	}else{
             self.xPosition += self.moveDx;
 	}
     }
     self.movePlayerDown = function() {
 	if(self.yPosition >= height){
-	    self.yPosition = height; 
+	    self.yPosition = height;
 	}else{
             self.yPosition += self.moveDx;
 	}
