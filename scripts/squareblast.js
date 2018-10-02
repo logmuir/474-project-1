@@ -120,7 +120,6 @@ var EnemySquare = function (squareIndex, releaseTick) {
         self.associatedDiv.style.visibility = 'hidden';
     }
 
-<<<<<<< HEAD
     self.onTick = function () {
 	if(self.xPosition <= 0
 	   || self.xPosition >= ConfigClass.getBoardWidth()){
@@ -131,14 +130,6 @@ var EnemySquare = function (squareIndex, releaseTick) {
 	   self.xPosition >= ConfigClass.getBoardHeight()){
 	    self.ySpeed*=-1; 
 	}
-=======
-    self.onTick = function (currentGameTick) {
-
-        if (currentGameTick == self.releaseTick) {
-            self.associatedDiv.style.visibility = 'visible';
-        }
-
->>>>>>> finishEnemySquares
         self.xPosition += self.xSpeed;
         self.yPosition += self.ySpeed;
     }
