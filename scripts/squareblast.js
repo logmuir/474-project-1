@@ -142,21 +142,17 @@ class ConfigClass {
         startSide = Math.floor(Math.random() * 4);
 
         if (startSide == 0) {
-            return {"xStartPosition": 0, "yStartPosition": this.getEnemySquareYPositionValue}
+            return {"xStartPosition": this.getEnemySquareXPositionValue, "yStartPosition": 0}
         }
-
         else if (startSide == 1) {
-            return {"xStartPosition": 0, "yStartPosition": this.getEnemySquareYPositionValue}            
+            return {"xStartPosition": this.enemySquareMaxXPosition, "yStartPosition": this.getEnemySquareYPositionValue}
         }
         else if (startSide == 2) {
-            
+            return {"xStartPosition": this.getEnemySquareXPositionValue, "yStartPosition": this.enemySquareMaxYPosition}
         }
         else if (startSide == 3) {
-            
+            return {"xStartPosition": 0, "yStartPosition": this.getEnemySquareYPositionValue}
         }
-
-
-
     }
 
     static getEnemySquareXPositionValue() {
