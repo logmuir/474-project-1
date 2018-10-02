@@ -14,7 +14,7 @@ var SquareBlastGame = function () {
         }
         document.getElementById("enemySquaresTargetDiv").outerHTML = htmlToInsert;
         self.enemySquares.forEach(enemySquare => {
-            enemySquare.updateAssociatedDiv();
+            enemySquare.initializeAssociatedDiv();
         });
 
 
@@ -36,6 +36,9 @@ var SquareBlastGame = function () {
 
     this.updateView = function () {
         self.player.updateSprite();
+        self.enemySquares.forEach(enemySquare => {
+            enemySquare.updateSprite();
+        });
     };
 
     this.initialize();
@@ -72,16 +75,18 @@ var Player = function () {
 
 var EnemySquare = function (squareIndex) {
     var self = this;
-    self.xPosition = 0;
-    self.yPos = 0;
-    self.xSpeed = Math.floor(Math.random() * 10);
-    self.ySpeed = Math.floor(Math.random() * 10);
+    self.xPosition = Math.floor(Math.random() * 1000);
+    self.yPos = Math.floor(Math.random() * 1000);
+    self.xSpeed = Math.pow(-1, Math.floor(Math.random() * 2) + 1) * (Math.floor(Math.random() * 10) + 1);
+    self.ySpeed = Math.pow(-1, Math.floor(Math.random() * 2) + 1) * (Math.floor(Math.random() * 10) + 1);
     self.squareID = "enemySquare" + squareIndex;
-    self.htmlDivString = "<div id='" + self.squareID + "'></div>";
+    self.htmlDivString = "<div id='" + self.squareID + "' class='enemySquare'></div>";
     self.associatedDiv = null;
 
-    self.updateAssociatedDiv = function () {
+    self.initializeAssociatedDiv = function () {
         self.associatedDiv = document.getElementById(self.squareID);
+        self.associatedDiv.style.left = self.xPosition + 'px';
+        self.associatedDiv.style.top = self.yPosition + 'px';
     }
 
     self.onTick = function () {
