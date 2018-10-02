@@ -98,7 +98,7 @@ var player = function(width, height) {
 var EnemySquare = function (squareIndex) {
     var self = this;
     self.xPosition = Math.floor(Math.random() * 1000);
-    self.yPos = Math.floor(Math.random() * 1000);
+    self.yPosition = Math.floor(Math.random() * 1000);
     self.xSpeed = Math.pow(-1, Math.floor(Math.random() * 2) + 1) * (Math.floor(Math.random() * 10) + 1);
     self.ySpeed = Math.pow(-1, Math.floor(Math.random() * 2) + 1) * (Math.floor(Math.random() * 10) + 1);
     self.squareID = "enemySquare" + squareIndex;
@@ -113,7 +113,7 @@ var EnemySquare = function (squareIndex) {
 
     self.onTick = function () {
         self.xPosition += self.xSpeed
-        self.yPos += self.ySpeed
+        self.yPosition += self.ySpeed
     }
 
     self.updateSprite = function () {
