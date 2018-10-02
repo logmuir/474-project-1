@@ -2,8 +2,6 @@ var SquareBlastGame = function () {
     var self = this;
     self.player = undefined;
     self.enemySquares = [];
-    self.gameHeight = document.getElementById('playBoard').offsetHeight - 4;
-    self.gameWidth = document.getElementById('playBoard').offsetWidth - 4;
 
     ConfigClass.enemySquareMaxXPosition = self.gameWidth;
     ConfigClass.enemySquareMaxYPosition = self.gameHeight;
@@ -69,7 +67,7 @@ var player = function (width, height) {
         self.playerDiv.style.left = self.xPosition + 'px';
         self.playerDiv.style.top = self.yPosition + 'px';
     }
-
+    
     self.movePlayerUp = function () {
         if (self.yPosition <= 4) {
             self.yPosition = 0;
@@ -85,15 +83,15 @@ var player = function (width, height) {
         }
     }
     self.movePlayerRight = function () {
-        if (self.xPosition >= width) {
-            self.xPosition = width;
+        if (self.xPosition >= getBoardWidth()) {
+            self.xPosition = getBoardWidth();
         } else {
             self.xPosition += self.moveDx;
         }
     }
     self.movePlayerDown = function () {
-        if (self.yPosition >= height) {
-            self.yPosition = height;
+        if (self.yPosition >= getBoardHeight()) {
+            self.yPosition = getBoardHeight();
         } else {
             self.yPosition += self.moveDx;
         }
@@ -139,5 +137,12 @@ class ConfigClass {
     }
     static getEnemySquareYSpeedValue() {
         return Math.pow(-1, Math.floor(Math.random() * 2) + 1) * (Math.floor(Math.random() * this.enemySquareMaxYSpeed) + 1);
+    }
+    static getBoardHeight(){	
+	return document.getElementById('playBoard').offsetHeight; 
+    }
+
+    static getBoardWidth(){
+	return document.getElementById('playBoard').offsetWidth - 4;
     }
 }
