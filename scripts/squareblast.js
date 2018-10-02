@@ -118,7 +118,6 @@ var EnemySquare = function (squareIndex) {
     self.onTick = function () {
         self.xPosition += self.xSpeed;
         self.yPosition += self.ySpeed;
-        ConfigClass.blorp()
     }
 
     self.updateSprite = function () {
@@ -139,9 +138,5 @@ class ConfigClass {
     }
     static getEnemySquareYSpeedValue() {
         return Math.pow(-1, Math.floor(Math.random() * 2) + 1) * (Math.floor(Math.random() * this.enemySquareMaxYSpeed) + 1);
-    }
-
-    static blorp() {
-        console.log("AY");
     }
 }
