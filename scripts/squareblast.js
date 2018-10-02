@@ -2,7 +2,7 @@ var SquareBlastGame = function () {
     var self = this;
     self.player = undefined;
     self.enemySquares = [];
-
+    
     self.currentTick = 0;
 
     ConfigClass.enemySquareMaxXPosition = ConfigClass.getBoardHeight();
@@ -10,7 +10,6 @@ var SquareBlastGame = function () {
     ConfigClass.enemySquareMaxXSpeed = 3;
     ConfigClass.enemySquareMaxYSpeed = 3;
     ConfigClass.totalEnemySquaresToGenerate = 10
-
 
     this.initialize = function () {
         self.player = new player(self.gameWidth, self.gameHeight);
@@ -118,6 +117,15 @@ var EnemySquare = function (squareIndex) {
     }
 
     self.onTick = function () {
+	if(self.xPosition <= 0
+	   || self.xPosition >= ConfigClass.getBoardWidth()){
+	    self.xSpeed*=-1; 
+	}
+
+	if(self.yPosition <= 0 ||
+	   self.xPosition >= ConfigClass.getBoardHeight()){
+	    self.ySpeed*=-1; 
+	}
         self.xPosition += self.xSpeed;
         self.yPosition += self.ySpeed;
     }
