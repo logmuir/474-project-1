@@ -37,7 +37,6 @@ var SquareBlastGame = function () {
 
         self.enemySquares.forEach(enemySquare => {
             enemySquare.onTick(self.currentTick);
-            console.log(enemySquare);
         });
 
         self.updateView();
@@ -105,11 +104,11 @@ var player = function (width, height) {
 
 var EnemySquare = function (squareIndex, releaseTick) {
     var self = this;
-    startPositionTuple = ConfigClass.getEnemySquareStartPositions();
-    self.xPosition = startPositionTuple[0];
-    self.yPosition = startPositionTuple[1];
-    self.xSpeed = ConfigClass.getEnemySquareXSpeedValue();
-    self.ySpeed = ConfigClass.getEnemySquareYSpeedValue();
+    startPositionAndSpeedTuple = ConfigClass.getEnemySquareStartPositionsAndSpeeds();
+    self.xPosition = startPositionAndSpeedTuple[0];
+    self.yPosition = startPositionAndSpeedTuple[1];
+    self.xSpeed = startPositionAndSpeedTuple[2];
+    self.ySpeed = startPositionAndSpeedTuple[3];
     self.squareID = "enemySquare" + squareIndex;
     self.htmlDivString = "<div id='" + self.squareID + "' class='enemySquare'></div>";
     self.associatedDiv = null;
@@ -140,26 +139,34 @@ var EnemySquare = function (squareIndex, releaseTick) {
 
 class ConfigClass {
 
-    static getEnemySquareStartPositions() {
+    static getEnemySquareStartPositionsAndSpeeds() {
         this.startSide = Math.floor(Math.random() * 4);
 
         this.startPositionArrayToReturn = [];
 
-        if (this.startSide == 0) {
+        if (this.startSide == 0) { // Top
             this.startPositionArrayToReturn.push(this.getEnemySquareXPositionValue());
             this.startPositionArrayToReturn.push(0);
+            this.startPositionArrayToReturn.push(Math.pow(-1, Math.floor(Math.random() * 2) + 1) * ConfigClass.getEnemySquareXSpeedValue());
+            this.startPositionArrayToReturn.push(ConfigClass.getEnemySquareYSpeedValue());
         }
-        else if (this.startSide == 1) {
+        else if (this.startSide == 1) { // Right
             this.startPositionArrayToReturn.push(this.enemySquareMaxXPosition);
             this.startPositionArrayToReturn.push(this.getEnemySquareYPositionValue());
+            this.startPositionArrayToReturn.push(-1 * ConfigClass.getEnemySquareXSpeedValue());
+            this.startPositionArrayToReturn.push(Math.pow(-1, Math.floor(Math.random() * 2) + 1) * ConfigClass.getEnemySquareYSpeedValue());
         }
-        else if (this.startSide == 2) {
+        else if (this.startSide == 2) { // Bottom
             this.startPositionArrayToReturn.push(this.getEnemySquareXPositionValue());
             this.startPositionArrayToReturn.push(this.enemySquareMaxYPosition);
+            this.startPositionArrayToReturn.push(Math.pow(-1, Math.floor(Math.random() * 2) + 1) * ConfigClass.getEnemySquareXSpeedValue());
+            this.startPositionArrayToReturn.push(-1 * ConfigClass.getEnemySquareYSpeedValue());
         }
-        else if (this.startSide == 3) {
+        else if (this.startSide == 3) { // Left
             this.startPositionArrayToReturn.push(0);
             this.startPositionArrayToReturn.push(this.getEnemySquareYPositionValue());
+            this.startPositionArrayToReturn.push(ConfigClass.getEnemySquareXSpeedValue());
+            this.startPositionArrayToReturn.push(Math.pow(-1, Math.floor(Math.random() * 2) + 1) * ConfigClass.getEnemySquareYSpeedValue());
         }
 
         return this.startPositionArrayToReturn;
@@ -172,10 +179,10 @@ class ConfigClass {
         return Math.floor(Math.random() * this.enemySquareMaxYPosition);
     }
     static getEnemySquareXSpeedValue() {
-        return Math.pow(-1, Math.floor(Math.random() * 2) + 1) * (Math.floor(Math.random() * this.enemySquareMaxXSpeed) + 1);
+        return (Math.floor(Math.random() * this.enemySquareMaxXSpeed) + 1);
     }
     static getEnemySquareYSpeedValue() {
-        return Math.pow(-1, Math.floor(Math.random() * 2) + 1) * (Math.floor(Math.random() * this.enemySquareMaxYSpeed) + 1);
+        return (Math.floor(Math.random() * this.enemySquareMaxYSpeed) + 1);
     }
     static getBoardHeight() {
         return document.getElementById('playBoard').offsetHeight;
