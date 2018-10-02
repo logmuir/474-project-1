@@ -5,6 +5,8 @@ var SquareBlastGame = function () {
     self.gameHeight = document.getElementById('playBoard').offsetHeight - 4;
     self.gameWidth = document.getElementById('playBoard').offsetWidth - 4;
 
+    self.currentTick = 0;
+
     ConfigClass.enemySquareMaxXPosition = self.gameWidth;
     ConfigClass.enemySquareMaxYPosition = self.gameHeight;
     ConfigClass.enemySquareMaxXSpeed = 3;
@@ -39,6 +41,7 @@ var SquareBlastGame = function () {
         });
 
         self.updateView();
+        self.currentTick++;
         return 0;
 
     }
