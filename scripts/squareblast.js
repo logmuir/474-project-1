@@ -9,8 +9,8 @@ var SquareBlastGame = function () {
     ConfigClass.enemySquareMaxYPosition = ConfigClass.getBoardWidth();
     ConfigClass.enemySquareMaxXSpeed = 3;
     ConfigClass.enemySquareMaxYSpeed = 3;
-    ConfigClass.totalEnemySquaresToGenerate = 10;
-    ConfigClass.enemySquareReleaseInterval = 100;
+    ConfigClass.totalEnemySquaresToGenerate = 100;
+    ConfigClass.enemySquareReleaseInterval = 10;
 
 
     this.initialize = function () {
@@ -104,8 +104,9 @@ var player = function (width, height) {
 
 var EnemySquare = function (squareIndex, releaseTick) {
     var self = this;
-    self.xPosition = ConfigClass.getEnemySquareXPositionValue();
-    self.yPosition = ConfigClass.getEnemySquareYPositionValue();
+    startPositionTuple = ConfigClass.getEnemySquareStartPositions();
+    self.xPosition = startPositionTuple[0];
+    self.yPosition = startPositionTuple[1];
     self.xSpeed = ConfigClass.getEnemySquareXSpeedValue();
     self.ySpeed = ConfigClass.getEnemySquareYSpeedValue();
     self.squareID = "enemySquare" + squareIndex;
@@ -138,21 +139,29 @@ var EnemySquare = function (squareIndex, releaseTick) {
 
 class ConfigClass {
 
-    static getEnemySquareStartPositionTuple() {
-        startSide = Math.floor(Math.random() * 4);
+    static getEnemySquareStartPositions() {
+        this.startSide = Math.floor(Math.random() * 4);
 
-        if (startSide == 0) {
-            return {"xStartPosition": this.getEnemySquareXPositionValue, "yStartPosition": 0}
+        this.startPositionArrayToReturn = [];
+
+        if (this.startSide == 0) {
+            this.startPositionArrayToReturn.push(this.getEnemySquareXPositionValue);
+            this.startPositionArrayToReturn.push(0);
         }
-        else if (startSide == 1) {
-            return {"xStartPosition": this.enemySquareMaxXPosition, "yStartPosition": this.getEnemySquareYPositionValue}
+        else if (this.startSide == 1) {
+            this.startPositionArrayToReturn.push(this.enemySquareMaxXPosition);
+            this.startPositionArrayToReturn.push(this.getEnemySquareYPositionValue);
         }
-        else if (startSide == 2) {
-            return {"xStartPosition": this.getEnemySquareXPositionValue, "yStartPosition": this.enemySquareMaxYPosition}
+        else if (this.startSide == 2) {
+            this.startPositionArrayToReturn.push(this.getEnemySquareXPositionValue);
+            this.startPositionArrayToReturn.push(this.enemySquareMaxYPosition);
         }
-        else if (startSide == 3) {
-            return {"xStartPosition": 0, "yStartPosition": this.getEnemySquareYPositionValue}
+        else if (this.startSide == 3) {
+            this.startPositionArrayToReturn.push(0);
+            this.startPositionArrayToReturn.push(this.getEnemySquareYPositionValue);
         }
+
+        return this.startPositionArrayToReturn;
     }
 
     static getEnemySquareXPositionValue() {
