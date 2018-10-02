@@ -40,7 +40,7 @@ var SquareBlastGame = function () {
 
         self.updateView();
         self.currentTick++;
-      //  document.getElementById('scorePanel').innerHTML = "Score: " + currentTick;
+        document.getElementById('scorePanel').innerHTML = "Score: " + currentTick;
         return 0;
 
     }
