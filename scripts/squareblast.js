@@ -58,8 +58,8 @@ var SquareBlastGame = function () {
 
 var player = function (width, height) {
     var self = this;
-    self.xPosition = 0;
-    self.yPosition = 0;
+    self.xPosition = 550;
+    self.yPosition = 200;
     self.moveDx = 4;
     self.moveDy = 4;
     self.width = width;
@@ -118,6 +118,22 @@ var EnemySquare = function (squareIndex) {
     }
 
     self.onTick = function () {
+
+	if(self.xPosition <=0){
+	    self.xPosition = 0;
+	    self.xSpeed *=-1; 
+	}else if (self.xPosition >= ConfigClass.getBoardWidth()){
+	    self.xPosition = ConfigClass.getBoardWidth();
+	    self.xSpeed*=-1;
+	}
+
+	if(self.yPosition <=0){
+	    self.yPosition = 0;
+	    self.ySpeed*=-1; 
+	}else if(self.yPosition >= ConfigClass.getBoardHeight()){
+	    self.yPositon = ConfigClass.getBoardHeight();
+	    self.ySpeed*=-1; 
+	}
         self.xPosition += self.xSpeed;
         self.yPosition += self.ySpeed;
     }
