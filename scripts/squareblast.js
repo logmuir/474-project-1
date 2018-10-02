@@ -9,7 +9,8 @@ var SquareBlastGame = function () {
     ConfigClass.enemySquareMaxYPosition = ConfigClass.getBoardWidth();
     ConfigClass.enemySquareMaxXSpeed = 3;
     ConfigClass.enemySquareMaxYSpeed = 3;
-    ConfigClass.totalEnemySquaresToGenerate = 10
+    ConfigClass.totalEnemySquaresToGenerate = 10;
+    ConfigClass.enemySquareReleaseInterval = 100;
 
 
     this.initialize = function () {
@@ -17,7 +18,7 @@ var SquareBlastGame = function () {
 
         var htmlToInsert = "";
         for (var currentIndex = 0; currentIndex < ConfigClass.totalEnemySquaresToGenerate; currentIndex++) {
-            var enemySquareToPush = new EnemySquare(currentIndex)
+            var enemySquareToPush = new EnemySquare(currentIndex, ConfigClass.enemySquareReleaseInterval * currentIndex);
             self.enemySquares.push(enemySquareToPush);
             htmlToInsert += enemySquareToPush.htmlDivString;
         }
@@ -101,7 +102,7 @@ var player = function (width, height) {
     }
 }
 
-var EnemySquare = function (squareIndex) {
+var EnemySquare = function (squareIndex, releaseTick) {
     var self = this;
     self.xPosition = ConfigClass.getEnemySquareXPositionValue();
     self.yPosition = ConfigClass.getEnemySquareYPositionValue();
@@ -110,6 +111,7 @@ var EnemySquare = function (squareIndex) {
     self.squareID = "enemySquare" + squareIndex;
     self.htmlDivString = "<div id='" + self.squareID + "' class='enemySquare'></div>";
     self.associatedDiv = null;
+    self.releaseTick = releaseTick;
 
     self.initializeAssociatedDiv = function () {
         self.associatedDiv = document.getElementById(self.squareID);
