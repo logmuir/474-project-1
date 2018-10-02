@@ -7,15 +7,16 @@ var SquareBlastGame = function () {
 
     ConfigClass.enemySquareMaxXPosition = self.gameWidth;
     ConfigClass.enemySquareMaxYPosition = self.gameHeight;
-    ConfigClass.enemySquareMaxXSpeed = 10;
-    ConfigClass.enemySquareMaxYSpeed = 10;
+    ConfigClass.enemySquareMaxXSpeed = 3;
+    ConfigClass.enemySquareMaxYSpeed = 3;
+    ConfigClass.totalEnemySquaresToGenerate = 10
 
 
     this.initialize = function () {
         self.player = new player(self.gameWidth, self.gameHeight);
 
         var htmlToInsert = "";
-        for (var currentIndex = 0; currentIndex < 10; currentIndex++) {
+        for (var currentIndex = 0; currentIndex < ConfigClass.totalEnemySquaresToGenerate; currentIndex++) {
             var enemySquareToPush = new EnemySquare(currentIndex)
             self.enemySquares.push(enemySquareToPush);
             htmlToInsert += enemySquareToPush.htmlDivString;
