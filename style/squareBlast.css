@@ -71,9 +71,9 @@
 }
 
 #player {
-    background: url('../images/pumpkin2.png');
-    height: 0px;
-    width: 0px;
-    background-repeat: no-repeat;
+    height: 100px;
+    width: 100px;
+    top: 50%;
+    right: 50%;
     position: absolute;
 }
