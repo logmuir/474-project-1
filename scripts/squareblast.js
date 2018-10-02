@@ -36,7 +36,7 @@ var SquareBlastGame = function () {
     this.onTick = function () {
 
         self.enemySquares.forEach(enemySquare => {
-            enemySquare.onTick();
+            enemySquare.onTick(self.currentTick);
         });
 
         self.updateView();
@@ -117,9 +117,15 @@ var EnemySquare = function (squareIndex, releaseTick) {
         self.associatedDiv = document.getElementById(self.squareID);
         self.associatedDiv.style.left = self.xPosition + 'px';
         self.associatedDiv.style.top = self.yPosition + 'px';
+        self.associatedDiv.style.visibility = 'hidden';
     }
 
-    self.onTick = function () {
+    self.onTick = function (currentGameTick) {
+
+        if (currentGameTick == self.releaseTick) {
+            self.associatedDiv.style.visibility = 'visible';
+        }
+
         self.xPosition += self.xSpeed;
         self.yPosition += self.ySpeed;
     }
@@ -131,6 +137,28 @@ var EnemySquare = function (squareIndex, releaseTick) {
 }
 
 class ConfigClass {
+
+    static getEnemySquareStartPositionTuple() {
+        startSide = Math.floor(Math.random() * 4);
+
+        if (startSide == 0) {
+            return {"xStartPosition": 0, "yStartPosition": this.getEnemySquareYPositionValue}
+        }
+
+        else if (startSide == 1) {
+            return {"xStartPosition": 0, "yStartPosition": this.getEnemySquareYPositionValue}            
+        }
+        else if (startSide == 2) {
+            
+        }
+        else if (startSide == 3) {
+            
+        }
+
+
+
+    }
+
     static getEnemySquareXPositionValue() {
         return Math.floor(Math.random() * this.enemySquareMaxXPosition);
     }
