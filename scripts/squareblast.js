@@ -9,14 +9,15 @@ var SquareBlastGame = function () {
     ConfigClass.enemySquareMaxYPosition = ConfigClass.getBoardWidth();
     ConfigClass.enemySquareMaxXSpeed = 3;
     ConfigClass.enemySquareMaxYSpeed = 3;
-    ConfigClass.totalEnemySquaresToGenerate = 10
+    ConfigClass.totalEnemySquaresToGenerate = 100;
+    ConfigClass.enemySquareReleaseInterval = 10;
 
     this.initialize = function () {
         self.player = new player(self.gameWidth, self.gameHeight);
 
         var htmlToInsert = "";
         for (var currentIndex = 0; currentIndex < ConfigClass.totalEnemySquaresToGenerate; currentIndex++) {
-            var enemySquareToPush = new EnemySquare(currentIndex)
+            var enemySquareToPush = new EnemySquare(currentIndex, ConfigClass.enemySquareReleaseInterval * currentIndex);
             self.enemySquares.push(enemySquareToPush);
             htmlToInsert += enemySquareToPush.htmlDivString;
         }
@@ -34,7 +35,7 @@ var SquareBlastGame = function () {
     this.onTick = function () {
 
         self.enemySquares.forEach(enemySquare => {
-            enemySquare.onTick();
+            enemySquare.onTick(self.currentTick);
         });
 
         self.updateView();
@@ -100,22 +101,26 @@ var player = function (width, height) {
     }
 }
 
-var EnemySquare = function (squareIndex) {
+var EnemySquare = function (squareIndex, releaseTick) {
     var self = this;
-    self.xPosition = ConfigClass.getEnemySquareXPositionValue();
-    self.yPosition = ConfigClass.getEnemySquareYPositionValue();
-    self.xSpeed = ConfigClass.getEnemySquareXSpeedValue();
-    self.ySpeed = ConfigClass.getEnemySquareYSpeedValue();
+    startPositionAndSpeedTuple = ConfigClass.getEnemySquareStartPositionsAndSpeeds();
+    self.xPosition = startPositionAndSpeedTuple[0];
+    self.yPosition = startPositionAndSpeedTuple[1];
+    self.xSpeed = startPositionAndSpeedTuple[2];
+    self.ySpeed = startPositionAndSpeedTuple[3];
     self.squareID = "enemySquare" + squareIndex;
     self.htmlDivString = "<div id='" + self.squareID + "' class='enemySquare'></div>";
     self.associatedDiv = null;
+    self.releaseTick = releaseTick;
 
     self.initializeAssociatedDiv = function () {
         self.associatedDiv = document.getElementById(self.squareID);
         self.associatedDiv.style.left = self.xPosition + 'px';
         self.associatedDiv.style.top = self.yPosition + 'px';
+        self.associatedDiv.style.visibility = 'hidden';
     }
 
+<<<<<<< HEAD
     self.onTick = function () {
 	if(self.xPosition <= 0
 	   || self.xPosition >= ConfigClass.getBoardWidth()){
@@ -126,6 +131,14 @@ var EnemySquare = function (squareIndex) {
 	   self.xPosition >= ConfigClass.getBoardHeight()){
 	    self.ySpeed*=-1; 
 	}
+=======
+    self.onTick = function (currentGameTick) {
+
+        if (currentGameTick == self.releaseTick) {
+            self.associatedDiv.style.visibility = 'visible';
+        }
+
+>>>>>>> finishEnemySquares
         self.xPosition += self.xSpeed;
         self.yPosition += self.ySpeed;
     }
@@ -137,6 +150,40 @@ var EnemySquare = function (squareIndex) {
 }
 
 class ConfigClass {
+
+    static getEnemySquareStartPositionsAndSpeeds() {
+        this.startSide = Math.floor(Math.random() * 4);
+
+        this.startPositionArrayToReturn = [];
+
+        if (this.startSide == 0) { // Top
+            this.startPositionArrayToReturn.push(this.getEnemySquareXPositionValue());
+            this.startPositionArrayToReturn.push(0);
+            this.startPositionArrayToReturn.push(Math.pow(-1, Math.floor(Math.random() * 2) + 1) * ConfigClass.getEnemySquareXSpeedValue());
+            this.startPositionArrayToReturn.push(ConfigClass.getEnemySquareYSpeedValue());
+        }
+        else if (this.startSide == 1) { // Right
+            this.startPositionArrayToReturn.push(this.enemySquareMaxXPosition);
+            this.startPositionArrayToReturn.push(this.getEnemySquareYPositionValue());
+            this.startPositionArrayToReturn.push(-1 * ConfigClass.getEnemySquareXSpeedValue());
+            this.startPositionArrayToReturn.push(Math.pow(-1, Math.floor(Math.random() * 2) + 1) * ConfigClass.getEnemySquareYSpeedValue());
+        }
+        else if (this.startSide == 2) { // Bottom
+            this.startPositionArrayToReturn.push(this.getEnemySquareXPositionValue());
+            this.startPositionArrayToReturn.push(this.enemySquareMaxYPosition);
+            this.startPositionArrayToReturn.push(Math.pow(-1, Math.floor(Math.random() * 2) + 1) * ConfigClass.getEnemySquareXSpeedValue());
+            this.startPositionArrayToReturn.push(-1 * ConfigClass.getEnemySquareYSpeedValue());
+        }
+        else if (this.startSide == 3) { // Left
+            this.startPositionArrayToReturn.push(0);
+            this.startPositionArrayToReturn.push(this.getEnemySquareYPositionValue());
+            this.startPositionArrayToReturn.push(ConfigClass.getEnemySquareXSpeedValue());
+            this.startPositionArrayToReturn.push(Math.pow(-1, Math.floor(Math.random() * 2) + 1) * ConfigClass.getEnemySquareYSpeedValue());
+        }
+
+        return this.startPositionArrayToReturn;
+    }
+
     static getEnemySquareXPositionValue() {
         return Math.floor(Math.random() * this.enemySquareMaxXPosition);
     }
@@ -144,10 +191,10 @@ class ConfigClass {
         return Math.floor(Math.random() * this.enemySquareMaxYPosition);
     }
     static getEnemySquareXSpeedValue() {
-        return Math.pow(-1, Math.floor(Math.random() * 2) + 1) * (Math.floor(Math.random() * this.enemySquareMaxXSpeed) + 1);
+        return (Math.floor(Math.random() * this.enemySquareMaxXSpeed) + 1);
     }
     static getEnemySquareYSpeedValue() {
-        return Math.pow(-1, Math.floor(Math.random() * 2) + 1) * (Math.floor(Math.random() * this.enemySquareMaxYSpeed) + 1);
+        return (Math.floor(Math.random() * this.enemySquareMaxYSpeed) + 1);
     }
     static getBoardHeight() {
         return document.getElementById('playBoard').offsetHeight;
