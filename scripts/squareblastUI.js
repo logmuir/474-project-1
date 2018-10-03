@@ -69,6 +69,10 @@ var SquareBlastUI = function () {
             setTimeout(function () { self.onTick(); }, 10);
             return;
         }
+
+        else {
+            
+        }
     }
     this.initialize();
 }

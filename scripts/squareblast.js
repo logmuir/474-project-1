@@ -32,7 +32,31 @@ var SquareBlastGame = function () {
         });
     };
 
+    this.checkCollisions = function () {
+        collisionDetected = false;
+        rect1 = self.player.playerDiv.getBoundingClientRect();
+        self.enemySquares.forEach(enemySquare => {
+            rect2 = enemySquare.associatedDiv.getBoundingClientRect();
+            var overlap = !(rect1.right < rect2.left || 
+                rect1.left > rect2.right || 
+                rect1.bottom < rect2.top || 
+                rect1.top > rect2.bottom);
+            if (overlap) {
+                collisionDetected = true;
+                console.log("overap")
+            }
+        });
+
+        if (collisionDetected) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
+    }
+
     this.onTick = function (activeKeys) {
+        result = 0;
         if (activeKeys.has(68)) {
             self.player.movePlayerRight();
         }
@@ -51,8 +75,9 @@ var SquareBlastGame = function () {
         });
 
         self.updateView();
+        result = self.checkCollisions();
         self.currentTick++;
-        return 0;
+        return result;
 
     }
 
