@@ -11,19 +11,18 @@
 </head>
 
 <body>
-    <div id="mainContent">
-        <div id="scoreBoard">
-            <div id="GameStopped"><button id="StartBtn" class="scoreBoardStopStartButton">Start Game</button>
-            </div>
-            <div id="GameRunning"><button id="StopBtn" class="scoreBoardStopStartButton">Stop Game</button>
-            </div>
-            <div id="scorePanel" class="OutputText"></div>
+    <div id="scoreBoard">
+        <div id="GameStopped"><button id="StartBtn" class="scoreBoardStopStartButton">Start Game</button>
         </div>
-        <div id="playBoard">
-	  <div id="player"><img src="/images/pumpkin2.png" id="player"></div>
+        <div id="GameRunning"><button id="StopBtn" class="scoreBoardStopStartButton">Stop Game</button>
+        </div>
+        <div id="scorePanel" class="OutputText"></div>
+    </div>
+    <div id="playBoard">
+        <img src="/images/background.jpg" id="playBoardBackground">
+        <div id="player"><img src="/images/pumpkin2.png" id="player"></div>
 
-            <div id="enemySquaresTargetDiv"></div>
-        </div>
+        <div id="enemySquaresTargetDiv"></div>
     </div>
 
     <script type="text/javascript">
