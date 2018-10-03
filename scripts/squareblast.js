@@ -134,18 +134,18 @@ var EnemySquare = function (squareIndex, releaseTick) {
 
         if (self.isActive) {
 
-            if (self.xPosition <= 0) {
+            if (self.xPosition + self.xSpeed <= 0) {
                 self.xPosition = 0;
                 self.xSpeed *= -1;
-            } else if (self.xPosition >= ConfigClass.getBoardWidth()) {
+            } else if (self.xPosition + self.xSpeed >= ConfigClass.getBoardWidth()) {
                 self.xPosition = ConfigClass.getBoardWidth();
                 self.xSpeed *= -1;
             }
 
-            if (self.yPosition <= 0) {
+            if (self.yPosition + self.ySpeed <= 0) {
                 self.yPosition = 0;
                 self.ySpeed *= -1;
-            } else if (self.yPosition >= ConfigClass.getBoardHeight()) {
+            } else if (self.yPosition + self.ySpeed >= ConfigClass.getBoardHeight()) {
                 self.yPositon = ConfigClass.getBoardHeight();
                 self.ySpeed *= -1;
             }
