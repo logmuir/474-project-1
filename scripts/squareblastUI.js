@@ -15,19 +15,15 @@ var SquareBlastUI = function () {
             if (self.running) {
                 if (event.keyCode == 68) { //right
                     self.activeKeys.add(68);
-                    self.game.player.movePlayerRight();
                 }
                 if (event.keyCode == 65) { //left
                     self.activeKeys.add(65);
-                    self.game.player.movePlayerLeft();
                 }
                 if (event.keyCode == 87) { //up
                     self.activeKeys.add(87);
-                    self.game.player.movePlayerUp();
                 }
                 if (event.keyCode == 83) { //down
                     self.activeKeys.add(83);
-                    self.game.player.movePlayerDown();
                 }
                 console.log(self.activeKeys);
             }
@@ -69,7 +65,7 @@ var SquareBlastUI = function () {
         if (self.running == false) {
             return;
         }
-        var result = self.game.onTick();
+        var result = self.game.onTick(self.activeKeys);
           $('#scorePanel').text('Score: ' + self.game.currentTick);
         if (result == 0) {
             setTimeout(function () { self.onTick(); }, 10);

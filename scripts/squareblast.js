@@ -32,7 +32,19 @@ var SquareBlastGame = function () {
         });
     };
 
-    this.onTick = function () {
+    this.onTick = function (activeKeys) {
+        if (activeKeys.has(68)) {
+            self.player.movePlayerRight();
+        }
+        if (activeKeys.has(65)) {
+            self.player.movePlayerLeft();
+        }
+        if (activeKeys.has(87)) {
+            self.player.movePlayerUp();
+        }
+        if (activeKeys.has(83)) {
+            self.player.movePlayerDown();
+        }
 
         self.enemySquares.forEach(enemySquare => {
             enemySquare.onTick(self.currentTick);
