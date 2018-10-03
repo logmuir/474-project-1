@@ -55,6 +55,7 @@ var SquareBlastUI = function () {
             $('#GameStopped').show();
             $('#GameRunning').hide();
             self.running = false;
+            location.reload();
         });
 
     };
@@ -71,7 +72,7 @@ var SquareBlastUI = function () {
         }
 
         else {
-            
+
         }
     }
     this.initialize();
