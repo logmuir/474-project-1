@@ -122,11 +122,6 @@ var EnemySquare = function (squareIndex, releaseTick) {
     }
 
     self.onTick = function (currentGameTick) {
-
-        if (self.squareID == "enemySquare70") {
-            console.log(self);
-        }
-
         if (currentGameTick == self.releaseTick) {
             self.associatedDiv.style.visibility = 'visible';
             self.isActive = true;

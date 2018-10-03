@@ -2,6 +2,9 @@ var SquareBlastUI = function () {
     var self = this;
     self.game = undefined;
     self.running = false;
+
+    self.activeKeys = new Set([])
+
     self.initialize = function () {
         self.game = new SquareBlastGame()
 
@@ -11,20 +14,42 @@ var SquareBlastUI = function () {
         document.addEventListener('keydown', function (event) {
             if (self.running) {
                 if (event.keyCode == 68) { //right
+                    self.activeKeys.add(68);
                     self.game.player.movePlayerRight();
                 }
                 if (event.keyCode == 65) { //left
+                    self.activeKeys.add(65);
                     self.game.player.movePlayerLeft();
                 }
                 if (event.keyCode == 87) { //up
+                    self.activeKeys.add(87);
                     self.game.player.movePlayerUp();
                 }
                 if (event.keyCode == 83) { //down
+                    self.activeKeys.add(83);
                     self.game.player.movePlayerDown();
                 }
-
+                console.log(self.activeKeys);
             }
-        })
+        });
+
+        document.addEventListener('keyup', function (event) {
+            if (self.running) {
+                if (event.keyCode == 68) { //right
+                    self.activeKeys.delete(68);
+                }
+                if (event.keyCode == 65) { //left
+                    self.activeKeys.delete(65);
+                }
+                if (event.keyCode == 87) { //up
+                    self.activeKeys.delete(87);
+                }
+                if (event.keyCode == 83) { //down
+                    self.activeKeys.delete(83);
+                }
+                console.log(self.activeKeys);
+            }
+        });
 
         $('#StartBtn').on('click', function () {
             $('#GameStopped').hide();
