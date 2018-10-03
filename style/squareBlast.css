@@ -1,0 +1,72 @@
+body {
+    height: 85%;
+    width: 85%;
+}
+
+#scoreBoard {
+    display: flex;
+    flex-direction: row;
+}
+
+#GameRunning {
+    flex-grow: 1
+}
+
+#GameStopped {
+    flex-grow: 1
+}
+
+.scoreBoardStopStartButton {
+    background-color: #282828;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    color: #efeaea;
+    width: 100%;
+}
+
+.scoreBoardStopStartButton:active {
+    background-color: #F5FFD2;
+    cursor: pointer;
+}
+
+.scoreBoardStopStartButton:hover {
+    background-color: #efeaea;
+    color: #282828;
+    cursor: pointer;
+}
+
+#scorePanel {
+    font-weight: bold;
+    text-align: center;
+    font-size: 26px;
+    background: #282828;
+    flex-grow: 1
+}
+
+.OutputText {
+    color: orange;
+}
+
+#playBoard {
+    position: relative;
+}
+
+#playBoardBackground {
+    height: 100%;
+    width: 100%;
+}
+
+#player {
+    height: 100px;
+    width: 100px;
+    position: absolute;
+}
+
+.enemySquare {
+    background: url('../images/pumpkin.jpg');
+    background-size: 20px;
+    height: 20px;
+    width: 20px;
+    position: absolute;
+}

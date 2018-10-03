@@ -1,44 +1,35 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Square Blast 2</title>
-        <link rel="stylesheet" href="style/squareblast.css" type="text/css">
-        <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
-        <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-        <script type='text/javascript' src="scripts/squareblast.js"></script>
-        <script type='text/javascript' src="scripts/squareblastUI.js"></script>
-    </head>
-    <body>
 
-        <div id="mainContent">
-            <div id="gameBoard">
-                <div id="scoreBoard">
-                    <div id="GameStopped"><button id="StartBtn" class="btnStyle">Start Game</button>
-                    <div class="Status">Click Start to begin</div></div>
-                    <div id="GameRunning"><button id="StopBtn" class="btnStyle">Stop Game</button>
-                    <div id="Status" class="Status"></div></div>
-                    <div id="score_calc" class="Scores">Current Score: <div class="OutputText" id="score_calc">0</div></div>
-                </div>
-                <div id="playBoard">
-                    <div id="futball">
+<head>
+    <title>Square Blast 2</title>
+    <link rel="stylesheet" href="style/squareBlast.css" type="text/css">
+    <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type='text/javascript' src="scripts/squareblast.js"></script>
+    <script type='text/javascript' src="scripts/squareblastUI.js"></script>
+</head>
 
-                    </div>
-                    <div id="goalBox">
-
-                    </div>
-                    <div id="goaliebox">
-                        <div id="goalie">
-
-                        </div>
-                    </div>
-                </div>
-            </div>
+<body>
+    <div id="scoreBoard">
+        <div id="GameStopped"><button id="StartBtn" class="scoreBoardStopStartButton">Start Game</button>
         </div>
+        <div id="GameRunning"><button id="StopBtn" class="scoreBoardStopStartButton">Stop Game</button>
+        </div>
+        <div id="scorePanel" class="OutputText"></div>
+    </div>
+    <div id="playBoard">
+        <img src="/images/background.jpg" id="playBoardBackground">
+        <div id="player"><img src="/images/pumpkin2.png" id="player"></div>
 
-<script type="text/javascript">
-    $(function(){
-       var fb=new futballUI();
-    });
-</script>
-    </body>
+        <div id="enemySquaresTargetDiv"></div>
+    </div>
+
+    <script type="text/javascript">
+        $(function () {
+            var fb = new SquareBlastUI();
+        });
+    </script>
+</body>
+
 </html>

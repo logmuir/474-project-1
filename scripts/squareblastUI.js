@@ -1,91 +1,78 @@
-var futballUI=function()
-{
-    var self=this;
-    this.game=undefined;
-    this.running=false;
-    this.initialize=function()
-    {
-        self.game=new futballGame()
+var SquareBlastUI = function () {
+    var self = this;
+    self.game = undefined;
+    self.running = false;
 
-           $('#GameStopped').show();
-            $('#GameRunning').hide();
+    self.activeKeys = new Set([])
 
-      $('body').keypress(function(event){
-            if (event.which==97)
-            {
-                self.game.goaltender.incrementPosition(-10);
+    self.initialize = function () {
+        self.game = new SquareBlastGame()
+
+        $('#GameStopped').show();
+        $('#GameRunning').hide();
+
+        document.addEventListener('keydown', function (event) {
+            if (self.running) {
+                if (event.keyCode == 68) { //right
+                    self.activeKeys.add(68);
+                }
+                if (event.keyCode == 65) { //left
+                    self.activeKeys.add(65);
+                }
+                if (event.keyCode == 87) { //up
+                    self.activeKeys.add(87);
+                }
+                if (event.keyCode == 83) { //down
+                    self.activeKeys.add(83);
+                }
             }
-            else if (event.which=122)
-            {
-                self.game.goaltender.incrementPosition(10);
-            }
-            $('#goalie').css("top",self.game.goaltender.Position+'px');
         });
-        $('#StartBtn').on('click',function(){
+
+        document.addEventListener('keyup', function (event) {
+            if (self.running) {
+                if (event.keyCode == 68) { //right
+                    self.activeKeys.delete(68);
+                }
+                if (event.keyCode == 65) { //left
+                    self.activeKeys.delete(65);
+                }
+                if (event.keyCode == 87) { //up
+                    self.activeKeys.delete(87);
+                }
+                if (event.keyCode == 83) { //down
+                    self.activeKeys.delete(83);
+                }
+            }
+        });
+
+        $('#StartBtn').on('click', function () {
             $('#GameStopped').hide();
             $('#GameRunning').show();
-            $('#Status').text('Get Ready...');
-            self.running=true;
-            self.takeShot();
+            self.running = true;
+            self.onTick();
         });
-        $('#StopBtn').on('click',function(){
+        $('#StopBtn').on('click', function () {
             $('#GameStopped').show();
             $('#GameRunning').hide();
-            self.running=false;
-            self.game.reset();
-            self.refreshView();
+            self.running = false;
         });
-    };
-    this.refreshView=function(){
-        $('#futball').css("left",self.game.ball.xPos-7);
-        $('#futball').css("top",self.game.ball.yPos-7);
-        $('#goalie').css("top",self.game.goaltender.Position+'px');
-        $('#score_calc').text(self.game.score_calc);
-    };
-    this.takeShot=function()
-    {
-            //wait some amount of time
-            var delay=Math.floor(Math.random()*1000+1001);
-            //calculate shot
-            self.game.calculateShot();
-            setTimeout(function(){
-                $('#Status').text('Get Ready...');
-                self.refreshView();
-                setTimeout(function(){
-                    self.updateUI();},3000);
-            },delay);
 
     };
-    this.updateUI=function()
-    {
-        if (self.running==false)
-        {
+
+    this.onTick = function () {
+        if (self.running == false) {
             return;
         }
-            var result=self.game.update(.1);
-            self.refreshView();
+        var result = self.game.onTick(self.activeKeys);
+        $('#scorePanel').text('Score: ' + self.game.currentTick);
+        if (result == 0) {
+            setTimeout(function () { self.onTick(); }, 10);
+            return;
+        }
 
-            if (result==0){
-                setTimeout(function(){self.updateUI();},10);
-                return;
-            }
-            else if (result==1)
-            {
-                $('#Status').text('GOOOOOOAAAAAALLLLLL!!!!!')
-            }
-            else if (result==2)
-            {
-                $('#Status').text('Great Block');
-            }
-            else
-            {
-                $('#Status').text('Miss')        ;
-            }
-            if (self.running==true)
-            {
-                self.takeShot();
-            }
-
+        else {
+            
+        }
     }
     this.initialize();
 }
