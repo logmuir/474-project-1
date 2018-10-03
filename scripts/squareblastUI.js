@@ -29,7 +29,6 @@ var SquareBlastUI = function () {
         $('#StartBtn').on('click', function () {
             $('#GameStopped').hide();
             $('#GameRunning').show();
-            $('#Status').text('Get Ready...');
             self.running = true;
             self.onTick();
         });
