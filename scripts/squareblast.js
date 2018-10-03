@@ -133,33 +133,44 @@ var EnemySquare = function (squareIndex, releaseTick) {
         self.associatedDiv.style.visibility = 'hidden';
     }
 
+    self.setActive = function () {
+        self.associatedDiv.style.visibility = 'visible';
+        self.isActive = true;
+    }
+
+    self.setInactive = function () {
+        self.isActive = false
+        self.associatedDiv.style.visibility = 'hidden';
+    }
+
     self.onTick = function (currentGameTick) {
         if (currentGameTick == self.releaseTick) {
-            self.associatedDiv.style.visibility = 'visible';
-            self.isActive = true;
+            self.setActive();
         }
 
         if (self.isActive) {
-
             if (self.xPosition + self.xSpeed <= 0) {
+                self.setInactive();
                 self.xPosition = 0;
                 self.xSpeed *= -1;
             } else if (self.xPosition + self.xSpeed >= ConfigClass.getBoardWidth()) {
+                self.setInactive();
                 self.xPosition = ConfigClass.getBoardWidth();
                 self.xSpeed *= -1;
             }
 
             if (self.yPosition + self.ySpeed <= 0) {
+                self.setInactive();
                 self.yPosition = 0;
                 self.ySpeed *= -1;
             } else if (self.yPosition + self.ySpeed >= ConfigClass.getBoardHeight()) {
+                self.setInactive();
                 self.yPositon = ConfigClass.getBoardHeight();
                 self.ySpeed *= -1;
             }
             self.xPosition += self.xSpeed;
             self.yPosition += self.ySpeed;
         }
-
     }
 
     self.updateSprite = function () {
