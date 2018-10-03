@@ -25,7 +25,6 @@ var SquareBlastUI = function () {
                 if (event.keyCode == 83) { //down
                     self.activeKeys.add(83);
                 }
-                console.log(self.activeKeys);
             }
         });
 
@@ -43,7 +42,6 @@ var SquareBlastUI = function () {
                 if (event.keyCode == 83) { //down
                     self.activeKeys.delete(83);
                 }
-                console.log(self.activeKeys);
             }
         });
 
@@ -66,7 +64,7 @@ var SquareBlastUI = function () {
             return;
         }
         var result = self.game.onTick(self.activeKeys);
-          $('#scorePanel').text('Score: ' + self.game.currentTick);
+        $('#scorePanel').text('Score: ' + self.game.currentTick);
         if (result == 0) {
             setTimeout(function () { self.onTick(); }, 10);
             return;
