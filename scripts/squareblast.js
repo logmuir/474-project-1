@@ -5,8 +5,9 @@ var SquareBlastGame = function () {
 
     self.currentTick = 0;
 
-    ConfigClass.enemySquareMaxXPosition = ConfigClass.getBoardHeight();
-    ConfigClass.enemySquareMaxYPosition = ConfigClass.getBoardWidth();
+    ConfigClass.enemySquareMaxXPosition = ConfigClass.getBoardWidth();
+    ConfigClass.enemySquareMaxYPosition = ConfigClass.getBoardHeight();
+
     ConfigClass.enemySquareMaxXSpeed = 3;
     ConfigClass.enemySquareMaxYSpeed = 3;
     ConfigClass.totalEnemySquaresToGenerate = 100;
@@ -28,7 +29,6 @@ var SquareBlastGame = function () {
 
 
         self.enemySquares.forEach(enemySquare => {
-            console.log(enemySquare);
         });
     };
 
@@ -75,7 +75,7 @@ var player = function (width, height) {
         if (self.yPosition <= 4) {
             self.yPosition = 0;
         } else {
-            self.yPosition -= self.moveDx;
+            self.yPosition -= self.moveDy;
         }
     }
     self.movePlayerLeft = function () {
@@ -112,6 +112,7 @@ var EnemySquare = function (squareIndex, releaseTick) {
     self.htmlDivString = "<div id='" + self.squareID + "' class='enemySquare'></div>";
     self.associatedDiv = null;
     self.releaseTick = releaseTick;
+    self.isActive = false;
 
     self.initializeAssociatedDiv = function () {
         self.associatedDiv = document.getElementById(self.squareID);
@@ -121,26 +122,37 @@ var EnemySquare = function (squareIndex, releaseTick) {
     }
 
     self.onTick = function (currentGameTick) {
-        if (currentGameTick == self.releaseTick) {
-            self.associatedDiv.style.visibility = 'visible';
-        }
-        if (self.xPosition <= 0) {
-            self.xPosition = 0;
-            self.xSpeed *= -1;
-        } else if (self.xPosition >= ConfigClass.getBoardWidth()) {
-            self.xPosition = ConfigClass.getBoardWidth();
-            self.xSpeed *= -1;
+
+        if (self.squareID == "enemySquare70") {
+            console.log(self);
         }
 
-        if (self.yPosition <= 0) {
-            self.yPosition = 0;
-            self.ySpeed *= -1;
-        } else if (self.yPosition >= ConfigClass.getBoardHeight()) {
-            self.yPositon = ConfigClass.getBoardHeight();
-            self.ySpeed *= -1;
+        if (currentGameTick == self.releaseTick) {
+            self.associatedDiv.style.visibility = 'visible';
+            self.isActive = true;
         }
-        self.xPosition += self.xSpeed;
-        self.yPosition += self.ySpeed;
+
+        if (self.isActive) {
+
+            if (self.xPosition <= 0) {
+                self.xPosition = 0;
+                self.xSpeed *= -1;
+            } else if (self.xPosition >= ConfigClass.getBoardWidth()) {
+                self.xPosition = ConfigClass.getBoardWidth();
+                self.xSpeed *= -1;
+            }
+
+            if (self.yPosition <= 0) {
+                self.yPosition = 0;
+                self.ySpeed *= -1;
+            } else if (self.yPosition >= ConfigClass.getBoardHeight()) {
+                self.yPositon = ConfigClass.getBoardHeight();
+                self.ySpeed *= -1;
+            }
+            self.xPosition += self.xSpeed;
+            self.yPosition += self.ySpeed;
+        }
+
     }
 
     self.updateSprite = function () {

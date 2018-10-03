@@ -1,4 +1,6 @@
 body {
+    height: 85%;
+    width: 85%;
 }
 
 #scoreBoard {
@@ -58,6 +60,7 @@ body {
 #player {
     height: 100px;
     width: 100px;
+    position: absolute;
 }
 
 .enemySquare {
@@ -65,4 +68,5 @@ body {
     background-size: 20px;
     height: 20px;
     width: 20px;
+    position: absolute;
 }
