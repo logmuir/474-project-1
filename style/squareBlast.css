@@ -70,3 +70,10 @@ body {
     width: 30px;
     position: absolute;
 }
+
+#gameOverMessageDiv {
+    top: 100px;
+    left: 100px;
+    visibility: hidden;
+    position: absolute;
+}

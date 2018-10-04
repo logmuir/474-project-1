@@ -72,7 +72,7 @@ var SquareBlastUI = function () {
         }
 
         else {
-
+            $('#gameOverMessageDiv').style.visibility =
         }
     }
     this.initialize();
