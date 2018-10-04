@@ -51,7 +51,7 @@ var SquareBlastUI = function () {
             self.running = true;
             self.onTick();
         });
-        $('#StopBtn').on('click', function () {
+        $('#RestartBtn').on('click', function () {
             $('#GameStopped').show();
             $('#GameRunning').hide();
             self.running = false;
@@ -66,7 +66,7 @@ var SquareBlastUI = function () {
         }
         var result = self.game.onTick(self.activeKeys);
         $('#scorePanel').text('Score: ' + self.game.currentTick);
-        if (result == 0) {
+        if (result == "continueGame") {
             setTimeout(function () { self.onTick(); }, 10);
             return;
         }

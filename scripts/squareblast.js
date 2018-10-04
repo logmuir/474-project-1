@@ -26,37 +26,45 @@ var SquareBlastGame = function () {
         self.enemySquares.forEach(enemySquare => {
             enemySquare.initializeAssociatedDiv();
         });
-
-
-        self.enemySquares.forEach(enemySquare => {
-        });
     };
+
+
+    this.checkWithinCircle = function (centerX, centerY, radius, pointX, pointY) {
+        d = Math.sqrt(Math.pow(pointX - centerX, 2) + Math.pow(pointY - centerY, 2));
+        return (d < radius);
+    }
 
     this.checkCollisions = function () {
         collisionDetected = false;
-        rect1 = self.player.playerDiv.getBoundingClientRect();
+        playerDivRectangle = self.player.playerDiv.getBoundingClientRect();
+        playerDivCenterX = playerDivRectangle.top + (0.50 * playerDivRectangle.height)
+        playerDivCenterY = playerDivRectangle.left + (0.50 * playerDivRectangle.width)
+
         self.enemySquares.forEach(enemySquare => {
-            rect2 = enemySquare.associatedDiv.getBoundingClientRect();
-            var overlap = !(rect1.right < rect2.left || 
-                rect1.left > rect2.right || 
-                rect1.bottom < rect2.top || 
-                rect1.top > rect2.bottom);
-            if (overlap) {
-                collisionDetected = true;
-                console.log("overap")
+            if (enemySquare.isActive) {
+                enemySquareDivRectangle = enemySquare.associatedDiv.getBoundingClientRect();
+                enemySquareDivCenterX = enemySquareDivRectangle.top + (0.50 * enemySquareDivRectangle.height)
+                enemySquareDivCenterY = enemySquareDivRectangle.left + (0.50 * enemySquareDivRectangle.width)
+
+                var overlap = self.checkWithinCircle(playerDivCenterX, playerDivCenterY, 35, enemySquareDivCenterX, enemySquareDivCenterY);
+                if (overlap) {
+                    console.log("Overlap");
+                    console.log(enemySquare);
+                    collisionDetected = true;
+                }
             }
         });
 
         if (collisionDetected) {
-            return 1;
+            return "collisionDetected";
         }
         else {
-            return 0;
+            return "continueGame";
         }
     }
 
     this.onTick = function (activeKeys) {
-        result = 0;
+        result = "continueGame";
         if (activeKeys.has(68)) {
             self.player.movePlayerRight();
         }
