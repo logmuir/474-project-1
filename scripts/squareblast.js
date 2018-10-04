@@ -80,7 +80,7 @@ var SquareBlastGame = function () {
         self.currentTick++;
         return gameStatus;
     }
-    
+
     this.handleActiveKeys = function (activeKeys) {
         if (activeKeys.has(68)) {
             self.player.movePlayerRight();
@@ -151,11 +151,7 @@ var player = function () {
 
 var EnemySquare = function (squareIndex, releaseTick) {
     var self = this;
-    startPositionAndSpeedTuple = ConfigClass.getEnemySquareStartPositionsAndSpeeds();
-    self.xPosition = startPositionAndSpeedTuple[0];
-    self.yPosition = startPositionAndSpeedTuple[1];
-    self.xSpeed = startPositionAndSpeedTuple[2];
-    self.ySpeed = startPositionAndSpeedTuple[3];
+    initializePositionAndSpeed();
     self.squareID = "enemySquare" + squareIndex;
     self.htmlDivString = "<div id='" + self.squareID + "' class='enemySquare'></div>";
     self.associatedDiv = null;
@@ -169,38 +165,71 @@ var EnemySquare = function (squareIndex, releaseTick) {
         self.associatedDiv.style.visibility = 'hidden';
     }
 
-    self.setActive = function () {
+    function initializePositionAndSpeed() {
+        this.startSide = Math.floor(Math.random() * 4);
+
+        this.startPositionArrayToReturn = [];
+
+        if (this.startSide == 0) { // Top
+            self.xPosition = ConfigClass.getEnemySquareXPositionValue();
+            self.yPosition = 0;
+            self.xSpeed = Math.pow(-1, Math.floor(Math.random() * 2) + 1) * ConfigClass.getEnemySquareXSpeedValue();
+            self.ySpeed = ConfigClass.getEnemySquareYSpeedValue();
+        }
+        else if (this.startSide == 1) { // Right
+            self.xPosition = ConfigClass.enemySquareMaxXPosition;
+            self.yPosition = ConfigClass.getEnemySquareYPositionValue();
+            self.xSpeed = -1 * ConfigClass.getEnemySquareXSpeedValue();
+            self.ySpeed = Math.pow(-1, Math.floor(Math.random() * 2) + 1) * ConfigClass.getEnemySquareYSpeedValue();
+        }
+        else if (this.startSide == 2) { // Bottom
+            self.xPosition = ConfigClass.getEnemySquareXPositionValue();
+            self.yPosition = ConfigClass.enemySquareMaxYPosition;
+            self.xSpeed = Math.pow(-1, Math.floor(Math.random() * 2) + 1) * ConfigClass.getEnemySquareXSpeedValue();
+            self.ySpeed = -1 * ConfigClass.getEnemySquareYSpeedValue();
+        }
+        else if (this.startSide == 3) { // Left
+            self.xPosition = 0;
+            self.yPosition = ConfigClass.getEnemySquareYPositionValue();
+            self.xSpeed = ConfigClass.getEnemySquareXSpeedValue();
+            self.ySpeed = Math.pow(-1, Math.floor(Math.random() * 2) + 1) * ConfigClass.getEnemySquareYSpeedValue();
+        }
+
+        return this.startPositionArrayToReturn;
+    }
+
+    function setActive() {
         self.associatedDiv.style.visibility = 'visible';
         self.isActive = true;
     }
 
-    self.setInactive = function () {
+    function setInactive() {
         self.isActive = false
         self.associatedDiv.style.visibility = 'hidden';
     }
 
     self.onTick = function (currentGameTick) {
         if (currentGameTick == self.releaseTick) {
-            self.setActive();
+            setActive();
         }
 
         if (self.isActive) {
             if (self.xPosition + self.xSpeed <= 0) {
-                self.setInactive();
+                setInactive();
                 self.xPosition = 0;
                 self.xSpeed *= -1;
             } else if (self.xPosition + self.xSpeed >= ConfigClass.getBoardWidth()) {
-                self.setInactive();
+                setInactive();
                 self.xPosition = ConfigClass.getBoardWidth();
                 self.xSpeed *= -1;
             }
 
             if (self.yPosition + self.ySpeed <= 0) {
-                self.setInactive();
+                setInactive();
                 self.yPosition = 0;
                 self.ySpeed *= -1;
             } else if (self.yPosition + self.ySpeed >= ConfigClass.getBoardHeight()) {
-                self.setInactive();
+                setInactive();
                 self.yPositon = ConfigClass.getBoardHeight();
                 self.ySpeed *= -1;
             }
@@ -216,39 +245,6 @@ var EnemySquare = function (squareIndex, releaseTick) {
 }
 
 class ConfigClass {
-
-    static getEnemySquareStartPositionsAndSpeeds() {
-        this.startSide = Math.floor(Math.random() * 4);
-
-        this.startPositionArrayToReturn = [];
-
-        if (this.startSide == 0) { // Top
-            this.startPositionArrayToReturn.push(this.getEnemySquareXPositionValue());
-            this.startPositionArrayToReturn.push(0);
-            this.startPositionArrayToReturn.push(Math.pow(-1, Math.floor(Math.random() * 2) + 1) * ConfigClass.getEnemySquareXSpeedValue());
-            this.startPositionArrayToReturn.push(ConfigClass.getEnemySquareYSpeedValue());
-        }
-        else if (this.startSide == 1) { // Right
-            this.startPositionArrayToReturn.push(this.enemySquareMaxXPosition);
-            this.startPositionArrayToReturn.push(this.getEnemySquareYPositionValue());
-            this.startPositionArrayToReturn.push(-1 * ConfigClass.getEnemySquareXSpeedValue());
-            this.startPositionArrayToReturn.push(Math.pow(-1, Math.floor(Math.random() * 2) + 1) * ConfigClass.getEnemySquareYSpeedValue());
-        }
-        else if (this.startSide == 2) { // Bottom
-            this.startPositionArrayToReturn.push(this.getEnemySquareXPositionValue());
-            this.startPositionArrayToReturn.push(this.enemySquareMaxYPosition);
-            this.startPositionArrayToReturn.push(Math.pow(-1, Math.floor(Math.random() * 2) + 1) * ConfigClass.getEnemySquareXSpeedValue());
-            this.startPositionArrayToReturn.push(-1 * ConfigClass.getEnemySquareYSpeedValue());
-        }
-        else if (this.startSide == 3) { // Left
-            this.startPositionArrayToReturn.push(0);
-            this.startPositionArrayToReturn.push(this.getEnemySquareYPositionValue());
-            this.startPositionArrayToReturn.push(ConfigClass.getEnemySquareXSpeedValue());
-            this.startPositionArrayToReturn.push(Math.pow(-1, Math.floor(Math.random() * 2) + 1) * ConfigClass.getEnemySquareYSpeedValue());
-        }
-
-        return this.startPositionArrayToReturn;
-    }
 
     static getEnemySquareXPositionValue() {
         return Math.floor(Math.random() * this.enemySquareMaxXPosition);
