@@ -11,6 +11,8 @@ var SquareBlastUI = function () {
         $('#GameStopped').show();
         $('#GameRunning').hide();
 
+        $('#gameOverMessageDiv').hide();
+
         document.addEventListener('keydown', function (event) {
             if (self.running) {
                 if (event.keyCode == 68) { //right
@@ -72,7 +74,10 @@ var SquareBlastUI = function () {
         }
 
         else {
-            $('#gameOverMessageDiv').style.visibility =
+            console.log("BLROp");
+            console.log($('#gameOverMessageDiv'));
+            $('#gameOverMessageDiv').show();
+            return;
         }
     }
     this.initialize();
