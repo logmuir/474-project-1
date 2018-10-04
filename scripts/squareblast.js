@@ -97,14 +97,12 @@ var SquareBlastGame = function () {
     };
 
     this.initialize();
-
-
 }
 
 var player = function (width, height) {
     var self = this;
-    self.xPosition = 550;
-    self.yPosition = 200;
+    self.xPosition = ConfigClass.getBoardWidth() / 2;
+    self.yPosition = ConfigClass.getBoardHeight() / 2;
     self.moveDx = 4;
     self.moveDy = 4;
     self.width = width;
@@ -131,15 +129,15 @@ var player = function (width, height) {
         }
     }
     self.movePlayerRight = function () {
-        if (self.xPosition >= ConfigClass.getBoardWidth()) {
-            self.xPosition = ConfigClass.getBoardWidth();
+        if (self.xPosition + self.playerDiv.getBoundingClientRect().width >= ConfigClass.getBoardWidth()) {
+            self.xPosition = ConfigClass.getBoardWidth() - self.playerDiv.getBoundingClientRect().width;
         } else {
             self.xPosition += self.moveDx;
         }
     }
     self.movePlayerDown = function () {
-        if (self.yPosition >= ConfigClass.getBoardHeight()) {
-            self.yPosition = ConfigClass.getBoardHeight();
+        if (self.yPosition + self.playerDiv.getBoundingClientRect().height >= ConfigClass.getBoardHeight()) {
+            self.yPosition = ConfigClass.getBoardHeight() - self.playerDiv.getBoundingClientRect().height;
         } else {
             self.yPosition += self.moveDx;
         }
