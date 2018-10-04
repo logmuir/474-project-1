@@ -5,6 +5,9 @@ var SquareBlastGame = function () {
 
     self.currentTick = 0;
 
+    ConfigClass.playerMoveDx = 4;
+    ConfigClass.playerMoveDy = 4;
+
     ConfigClass.enemySquareMaxXPosition = ConfigClass.getBoardWidth();
     ConfigClass.enemySquareMaxYPosition = ConfigClass.getBoardHeight();
 
@@ -14,7 +17,7 @@ var SquareBlastGame = function () {
     ConfigClass.enemySquareReleaseInterval = 10;
 
     this.initialize = function () {
-        self.player = new player(self.gameWidth, self.gameHeight);
+        self.player = new player();
 
         var htmlToInsert = "";
         for (var currentIndex = 0; currentIndex < ConfigClass.totalEnemySquaresToGenerate; currentIndex++) {
@@ -64,7 +67,21 @@ var SquareBlastGame = function () {
     }
 
     this.onTick = function (activeKeys) {
-        result = "continueGame";
+        gameStatus = "continueGame";
+
+        self.handleActiveKeys(activeKeys);
+
+        self.enemySquares.forEach(enemySquare => {
+            enemySquare.onTick(self.currentTick);
+        });
+
+        self.updateView();
+        gameStatus = self.checkCollisions();
+        self.currentTick++;
+        return gameStatus;
+    }
+    
+    this.handleActiveKeys = function (activeKeys) {
         if (activeKeys.has(68)) {
             self.player.movePlayerRight();
         }
@@ -77,16 +94,6 @@ var SquareBlastGame = function () {
         if (activeKeys.has(83)) {
             self.player.movePlayerDown();
         }
-
-        self.enemySquares.forEach(enemySquare => {
-            enemySquare.onTick(self.currentTick);
-        });
-
-        self.updateView();
-        result = self.checkCollisions();
-        self.currentTick++;
-        return result;
-
     }
 
     this.updateView = function () {
@@ -99,14 +106,12 @@ var SquareBlastGame = function () {
     this.initialize();
 }
 
-var player = function (width, height) {
+var player = function () {
     var self = this;
     self.xPosition = ConfigClass.getBoardWidth() / 2;
     self.yPosition = ConfigClass.getBoardHeight() / 2;
-    self.moveDx = 4;
-    self.moveDy = 4;
-    self.width = width;
-    self.height = height;
+    self.moveDx = ConfigClass.playerMoveDx;
+    self.moveDy = ConfigClass.playerMoveDy;
     self.playerDiv = document.getElementById('player');
 
     self.updateSprite = function () {
