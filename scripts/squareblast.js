@@ -171,31 +171,44 @@ var EnemySquare = function (squareIndex, releaseTick) {
         this.startPositionArrayToReturn = [];
 
         if (this.startSide == 0) { // Top
-            self.xPosition = ConfigClass.getEnemySquareXPositionValue();
+            self.xPosition = generateRandomXPositionValue();
             self.yPosition = 0;
-            self.xSpeed = Math.pow(-1, Math.floor(Math.random() * 2) + 1) * ConfigClass.getEnemySquareXSpeedValue();
-            self.ySpeed = ConfigClass.getEnemySquareYSpeedValue();
+            self.xSpeed = Math.pow(-1, Math.floor(Math.random() * 2) + 1) * generateRandomXSpeedValue();
+            self.ySpeed = generateRandomYSpeedValue();
         }
         else if (this.startSide == 1) { // Right
             self.xPosition = ConfigClass.enemySquareMaxXPosition;
-            self.yPosition = ConfigClass.getEnemySquareYPositionValue();
-            self.xSpeed = -1 * ConfigClass.getEnemySquareXSpeedValue();
-            self.ySpeed = Math.pow(-1, Math.floor(Math.random() * 2) + 1) * ConfigClass.getEnemySquareYSpeedValue();
+            self.yPosition = generateRandomYPositionValue();
+            self.xSpeed = -1 * generateRandomXSpeedValue();
+            self.ySpeed = Math.pow(-1, Math.floor(Math.random() * 2) + 1) * generateRandomYSpeedValue();
         }
         else if (this.startSide == 2) { // Bottom
-            self.xPosition = ConfigClass.getEnemySquareXPositionValue();
+            self.xPosition = generateRandomXPositionValue();
             self.yPosition = ConfigClass.enemySquareMaxYPosition;
-            self.xSpeed = Math.pow(-1, Math.floor(Math.random() * 2) + 1) * ConfigClass.getEnemySquareXSpeedValue();
-            self.ySpeed = -1 * ConfigClass.getEnemySquareYSpeedValue();
+            self.xSpeed = Math.pow(-1, Math.floor(Math.random() * 2) + 1) * generateRandomXSpeedValue();
+            self.ySpeed = -1 * generateRandomYSpeedValue();
         }
         else if (this.startSide == 3) { // Left
             self.xPosition = 0;
-            self.yPosition = ConfigClass.getEnemySquareYPositionValue();
-            self.xSpeed = ConfigClass.getEnemySquareXSpeedValue();
-            self.ySpeed = Math.pow(-1, Math.floor(Math.random() * 2) + 1) * ConfigClass.getEnemySquareYSpeedValue();
+            self.yPosition = generateRandomYPositionValue();
+            self.xSpeed = generateRandomXSpeedValue();
+            self.ySpeed = Math.pow(-1, Math.floor(Math.random() * 2) + 1) * generateRandomYSpeedValue();
         }
 
         return this.startPositionArrayToReturn;
+    }
+
+    function generateRandomXPositionValue() {
+        return Math.floor(Math.random() * ConfigClass.enemySquareMaxXPosition);
+    }
+    function generateRandomYPositionValue() {
+        return Math.floor(Math.random() * ConfigClass.enemySquareMaxYPosition);
+    }
+    function generateRandomXSpeedValue() {
+        return (Math.floor(Math.random() * ConfigClass.enemySquareMaxXSpeed) + 1);
+    }
+    function generateRandomYSpeedValue() {
+        return (Math.floor(Math.random() * ConfigClass.enemySquareMaxYSpeed) + 1);
     }
 
     function setActive() {
@@ -245,19 +258,6 @@ var EnemySquare = function (squareIndex, releaseTick) {
 }
 
 class ConfigClass {
-
-    static getEnemySquareXPositionValue() {
-        return Math.floor(Math.random() * this.enemySquareMaxXPosition);
-    }
-    static getEnemySquareYPositionValue() {
-        return Math.floor(Math.random() * this.enemySquareMaxYPosition);
-    }
-    static getEnemySquareXSpeedValue() {
-        return (Math.floor(Math.random() * this.enemySquareMaxXSpeed) + 1);
-    }
-    static getEnemySquareYSpeedValue() {
-        return (Math.floor(Math.random() * this.enemySquareMaxYSpeed) + 1);
-    }
     static getBoardHeight() {
         return document.getElementById('playBoard').offsetHeight;
     }
