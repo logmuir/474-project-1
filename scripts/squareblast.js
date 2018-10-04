@@ -78,6 +78,18 @@ var SquareBlastGame = function () {
         self.updateView();
         gameStatus = self.checkCollisions();
         self.currentTick++;
+        
+        winCondition = true;
+        self.enemySquares.forEach(enemySquare => {
+            if (enemySquare.isActive) {
+                winCondition = false;
+            }
+        });
+
+        if (winCondition) {
+            gameStatus = "winConditionMet";
+        }
+
         return gameStatus;
     }
 

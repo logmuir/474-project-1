@@ -12,6 +12,9 @@ var SquareBlastUI = function () {
         $('#GameRunning').hide();
 
         $('#gameOverMessageDiv').hide();
+        $('#winMessageDiv').hide();
+
+        
 
         document.addEventListener('keydown', function (event) {
             if (self.running) {
@@ -73,9 +76,12 @@ var SquareBlastUI = function () {
             return;
         }
 
+        else if (result == "winConditionMet") {
+            $('#winMessageDiv').show();
+            return;
+        }
+
         else {
-            console.log("BLROp");
-            console.log($('#gameOverMessageDiv'));
             $('#gameOverMessageDiv').show();
             return;
         }
